@@ -1,0 +1,35 @@
+
+<div class="row">
+  <div class="col-9">
+    <span>{{books.length}} Results</span>
+  </div>
+  <div class="col-3">
+    <div class="dropdown">
+      <button type="button" class="btn btn-sm dropdown-toggle dropdown-button" data-toggle="dropdown"
+              [innerHTML]="buttonText" id="dropdownMenu1" aria-haspopup="true" aria-expanded="false">
+      </button>
+      <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+        <a (click)="sortAZ()" class="dropdown-item">Title: A-Z</a>
+        <a (click)="sortZA()" class="dropdown-item">Title: Z-A</a>
+        <a (click)="sortLowHigh()" class="dropdown-item">Price: Low to High</a>
+        <a (click)="sortHighLow()" class="dropdown-item">Price: High to Low</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4" *ngFor="let book of books">
+    <div class="book-wrapper">
+      <a [routerLink]="['/books', book.BookId]"><img src="http://localhost:50000/{{book.Image}}" class="book-img" /></a>
+      <a [routerLink]="['/books', book.BookId]"><span class="title-text">{{book.Title}}</span></a>
+      <span class="author-text">{{book.AuthorLastName}}, {{book.AuthorFirstName}}</span>
+      <div class="row price">
+        <span class="col price-text" [ngClass]="{'discount': book.Discount}">{{book.Price | currency:"EUR"}}</span>
+        <span class="col price-text" *ngIf="book.Discount">{{book.Discount | currency:"EUR"}}</span>
+      </div>
+      <button type="button" (click)="addToBasket()" class="btn btn-sm btn-dark">Add to Basket</button>
+    </div>
+  </div>
+</div>
+
