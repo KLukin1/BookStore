@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, Validators } from '@angular/forms';
 import { UserService } from '../services/user-service';
 import { NotifierService } from 'angular-notifier';
-import { CreateAccountValidators } from './create-account.validators';
+import { AccountValidators } from '../services/account.validators';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class CreateAccountComponent implements OnInit {
             ]),
             Password: new FormControl('', [
                 Validators.required,
-                CreateAccountValidators.cannotContainSpace
+                AccountValidators.cannotContainSpace
             ]),
             ConfirmPassword: new FormControl('', Validators.required)
         });

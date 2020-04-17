@@ -28,7 +28,7 @@
         <span class="col price-text" [ngClass]="{'discount': book.Discount}">{{book.Price | currency:"EUR"}}</span>
         <span class="col price-text" *ngIf="book.Discount">{{book.Discount | currency:"EUR"}}</span>
       </div>
-      <button type="button" (click)="addToBasket()" class="btn btn-sm btn-dark">Add to Basket</button>
+      <button type="button" (click)="addToBasket(book.BookId)" class="btn btn-sm btn-dark">Add to Basket</button>
     </div>
   </div>
 </div>

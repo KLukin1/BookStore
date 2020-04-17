@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AccountValidators } from '../services/account.validators';
+import { UserService } from '../services/user-service';
 
 
 @Component({
@@ -9,19 +11,34 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AccountComponent implements OnInit {
 
-    user;
     signInForm;
-    email: string;
-    password: string;
+
+    constructor(private userService: UserService) {}
 
     ngOnInit() {
         this.signInForm = new FormGroup({
-            email: new FormControl(),
-            password: new FormControl()
+            Email: new FormControl('', [
+                Validators.required,
+                Validators.email
+            ]),
+            Password: new FormControl('', [
+                Validators.required,
+                AccountValidators.cannotContainSpace
+            ])
         });
     }
 
+    get getEmail() {
+        return this.signInForm.get('Email');
+    }
+    get getPassword() {
+        return this.signInForm.get('Password');
+    }
+
     onSignIn(f) {
-        console.log(f.value);
+        this.userService.login(f.value).subscribe(
+            result => {
+                console.log(result);
+            })
     }
 }

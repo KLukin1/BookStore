@@ -10,6 +10,8 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class BookService {
 
+    bookId: number;
+
     constructor(private httpClient: HttpClient) { }
 
     getBooks(categoryName: string, author: string): Observable<Book[]> {
@@ -37,4 +39,5 @@ export class BookService {
         return this.httpClient.get('http://localhost:50000/api/books/reccomended')
             .pipe(map(response => <Book[]>response))
     }
+
 }

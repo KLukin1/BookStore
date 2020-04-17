@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, retry } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CreatedUser } from '../models/created-user-model';
@@ -13,6 +13,11 @@ export class UserService {
 
     createUser(user: CreatedUser): Observable<CreatedUser> {
         return this.httpClient.post('http://localhost:50000/api/users/', user)
+            .pipe(map(response => <CreatedUser>response));
+    }
+
+    login(user: CreatedUser): Observable<CreatedUser> {
+        return this.httpClient.post('http://localhost:50000/api/login', user)
             .pipe(map(response => <CreatedUser>response));
     }
 }

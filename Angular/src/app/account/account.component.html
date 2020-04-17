@@ -3,12 +3,20 @@
     <h2>Sign In</h2>
     <form #f="ngForm" [formGroup]="signInForm" (ngSubmit)="onSignIn(f)">
       <div>
-        <label for="email">Email:</label><br />
-        <input type="text" id="email" formControlName="email" />
+        <label>Email:</label><br />
+        <input type="text" formControlName="Email" />
+        <div *ngIf="getEmail.invalid && getEmail.touched" class="alert alert-danger">
+          <div *ngIf="getEmail.errors.required">Required field</div>
+          <div *ngIf="getEmail.errors.email">Email is incorrect</div>
+        </div>
       </div>
       <div>
-        <label for="password">Password:</label><br />
-        <input type="text" id="password" formControlName="password" />
+        <label>Password:</label><br />
+        <input type="text" formControlName="Password" />
+        <div *ngIf="getPassword.invalid && getPassword.touched" class="alert alert-danger">
+          <div *ngIf="getPassword.errors.required">Required field</div>
+          <div *ngIf="getPassword.errors.cannotContainSpace">Password cannot contain space</div>
+        </div>
       </div>
       <button type="submit" class="btn btn-primary">Sign In</button><br />
       <a routerLink="/forgot-password" class="forgot-pass">Forgot Password?</a>
