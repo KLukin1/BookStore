@@ -177,6 +177,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaseBookModel.cs" />
+    <Compile Include="Models\BasketGetApiModel.cs" />
     <Compile Include="Models\BookGetApiModel.cs" />
     <Compile Include="Models\BookIdModel.cs" />
     <Compile Include="Models\CategoryGetApiModel.cs" />

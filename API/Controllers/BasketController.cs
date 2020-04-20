@@ -2,6 +2,7 @@
 using DataBase;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -40,6 +41,7 @@ namespace API.Controllers
                     var newItem = new BasketItem();
                     newItem.BasketId = newBasket.Id;
                     newItem.BookId = bookId.BookId;
+                    newItem.Count = 1;
                     db.BasketItems.Add(newItem);
                     db.SaveChanges();
                 }
@@ -49,11 +51,93 @@ namespace API.Controllers
                     var newItem = new BasketItem();
                     newItem.BasketId = basket.Id;
                     newItem.BookId = bookId.BookId;
+                    newItem.Count = 1;
                     db.BasketItems.Add(newItem);
                     db.SaveChanges();
                 }
 
                 return true;
+            }
+        }
+
+        [HttpGet]
+        [Route("")]
+        public IHttpActionResult GetBasket()
+        {
+            return Ok(GetBooksFromBasket());
+        }
+
+        public List<BasketGetApiModel> GetBooksFromBasket()
+        {
+            using (var db = new BookStoreContext())
+            {
+                string where = "";
+                var parameters = new List<SqlParameter> { };
+
+                if (loggedInUserId > 0)
+                {
+                    where = $"where Basket.UserId = @loggedInUserId";
+                    parameters.Add(new SqlParameter("@loggedInUserId", loggedInUserId.ToString().Trim()));
+
+                }
+                var list = db.Database.SqlQuery<BasketGetApiModel>(@"select Basket.Id as BasketId, 
+                                                    BasketItem.Id as BasketItemId, Book.Id as BookId, 
+                                                    Book.Title, Book.Image, Book.Price, Book.Discount,
+                                                    Author.FirstName as AuthorFirstName, 
+                                                    Author.LastName as AuthorLastName,
+                                                    BasketItem.[Count] as [Count]
+                                                    from BasketItem
+                                                    inner join Basket
+                                                    on BasketItem.BasketId = Basket.Id
+                                                    inner join Book
+                                                    on BasketItem.BookId = Book.Id
+                                                    inner join Author
+                                                    on Book.AuthorId = Author.Id " + where, parameters.ToArray()).ToList();
+
+                return list;
+            }
+        }
+
+        [HttpDelete]
+        [Route("{itemId:int}")]
+        public IHttpActionResult DeleteFromBasket(int itemId)
+        {
+            return Ok(DeleteItemFromBasket(itemId));
+        }
+
+        public bool DeleteItemFromBasket(int itemId)
+        {
+            using (var db = new BookStoreContext())
+            {
+                var item = db.BasketItems.FirstOrDefault(x => x.Id == itemId);
+                db.BasketItems.Remove(item);
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+        [HttpPut]
+        [Route("basketItem")]
+        public IHttpActionResult UpdateBasketItem(BasketGetApiModel basketItem)
+        {
+            return Ok(UpdateItem(basketItem));
+        }
+
+        public BasketItem UpdateItem(BasketGetApiModel basketItem)
+        {
+            using (var db = new BookStoreContext())
+            {
+                var itemToUpdate = db.BasketItems.FirstOrDefault(x => x.Id == basketItem.BasketItemId);
+                if (basketItem.Count == 0)
+                {
+                    db.BasketItems.Remove(itemToUpdate);
+                }
+                else
+                {
+                    itemToUpdate.Count = basketItem.Count;
+                }
+                db.SaveChanges();
+                return itemToUpdate;
             }
         }
     }

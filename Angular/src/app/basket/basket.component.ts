@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../services/book-service';
-import { Book } from '../models/book-model';
 import { BasketService } from '../services/basket-service';
+import { BasketItem } from '../models/basket-model';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
     selector: 'basket',
@@ -10,35 +11,72 @@ import { BasketService } from '../services/basket-service';
 })
 export class BasketComponent implements OnInit {
 
-    books: Book[] = [];
-    prices: number[] = [];
-    totalPrice: number = 0;
+    books: BasketItem[] = [];
+    prices: number[];
+    totalPrice: number;
+    counter: number;
 
-    constructor(private bookService: BookService, private basketService: BasketService) { }
+    constructor(private bookService: BookService, private basketService: BasketService,
+        private notifier: NotifierService) { }
 
     ngOnInit() {
         this.getBasket();
     }
 
     getBasket() {
-        //this.basketService.getBookId().subscribe(
-        //    response => {
-
-        //    }
-        //)
-        //this.bookService.getBookById(id).subscribe(
-        //    result => {
-        //        this.books.push(result)
-
-        //        for (let i of this.books) {
-        //            this.prices.push(i.Price);
-        //        }
-
-        //        for (let price of this.prices) {
-        //            this.totalPrice += price;
-        //        }
-        //    }
-        //)
+        this.basketService.getBasket().subscribe(
+            response => {
+                this.books = response;
+                this.calculatePrices();
+            })
     }
 
+    deleteFromBasket(basketItemId: number) {
+        this.basketService.deleteFromBasket(basketItemId).subscribe(
+            response => {
+                this.books = this.books.filter(x => x.BasketItemId != basketItemId);
+                this.calculatePrices();
+                this.notifier.notify("success", "Book was removed from the basket");
+            })
+    }
+
+    calculatePrices() {
+        this.prices = [];
+        this.totalPrice = 0;
+
+        for (let book of this.books) {
+            if (book.Discount) {
+                this.prices.push(book.Discount * book.Count);
+            } else {
+                this.prices.push(book.Price * book.Count);
+            }
+            this.counter = book.Count;
+        }
+        for (let price of this.prices) {
+            this.totalPrice += price;
+        }
+    }
+
+    increaseCount(book: BasketItem) {
+        book.Count += 1;
+        this.calculatePrices();
+        this.basketService.changeCount(book).subscribe(
+            result => {
+                this.notifier.notify("info", "Basket is updated");
+            })
+    }
+
+    decreaseCount(book: BasketItem) {
+        if (book.Count == 1) {
+            book.Count = 1;
+        } else {
+            book.Count -= 1;
+        }
+        this.calculatePrices();
+        this.basketService.changeCount(book).subscribe(
+            result => {
+                this.notifier.notify("info", "Basket is updated");
+
+            })
+    }
 }

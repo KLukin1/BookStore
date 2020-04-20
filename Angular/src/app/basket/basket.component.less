@@ -11,7 +11,7 @@ h2 {
   padding: 10px;
   margin: 10px;
 
-  &:last-child{
+  &:last-child {
     border-bottom: 1px solid #ddd;
   }
 
@@ -49,6 +49,18 @@ h2 {
   .book-author {
     color: #888;
     font-size: 14px;
+  }
+
+  .counter {
+    border: 1px solid #999;
+    color: #444;
+    text-align: center;
+
+    &:first-child,
+    &:last-child {
+      cursor: pointer;
+      background-color: #eee;
+    }
   }
 
   .book-price {

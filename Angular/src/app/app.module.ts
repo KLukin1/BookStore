@@ -15,6 +15,7 @@ import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { NotifierModule } from "angular-notifier";
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { CounterComponent } from './counter/counter.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
         BooksComponent,
         OneBookComponent,
         ForgotPassComponent,
-        CreateAccountComponent
+        CreateAccountComponent,
+        CounterComponent
     ],
     imports: [
         BrowserModule,
