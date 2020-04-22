@@ -56,26 +56,12 @@ export class BasketComponent implements OnInit {
     }
 
 
-    changeCounter(c: boolean, book: BasketItem) {
-        if (c == true) {
-            book.Count += 1;
-            this.calculatePrices();
-            this.basketService.changeCount(book).subscribe(
-                result => {
-                    this.notifier.notify("info", "Basket is updated");
-                })
-        }
-        else {
-            if (book.Count == 1) {
-                book.Count = 1;
-            } else {
-                book.Count -= 1;
-            }
-            this.calculatePrices();
-            this.basketService.changeCount(book).subscribe(
-                result => {
-                    this.notifier.notify("info", "Basket is updated");
-                })
-        }
+    changeCounter(c: number, book: BasketItem) {
+        book.Count = c;
+        this.calculatePrices();
+        this.basketService.changeCount(book).subscribe(
+            result => {
+                this.notifier.notify("info", "Basket is updated");
+            })
     }
 }

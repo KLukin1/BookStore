@@ -42,14 +42,8 @@ export class OneBookComponent implements OnInit {
         )
     }
 
-    changeCount(c: boolean) {
-        if (c == true) {
-            this.count += 1;
-        } else if (c == false && this.count == 1) {
-            this.count = 1;
-        } else {
-            this.count -= 1;
-        }
+    changeCount(c: number) {
+        this.count = c;
     }
 }
 

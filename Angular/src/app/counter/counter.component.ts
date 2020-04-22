@@ -8,9 +8,16 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class CounterComponent {
 
     @Input() counter: number;
-    @Output() change = new EventEmitter<boolean>();
+    @Output() change = new EventEmitter<number>();
 
     changeCount(c: boolean) {
-        this.change.emit(c);
+        if (c == true) {
+            this.counter += 1;
+        } else if (c == false && this.counter == 1) {
+            this.counter = 1;
+        } else {
+            this.counter -= 1;
+        }
+        this.change.emit(this.counter);
     }
 }
