@@ -14,10 +14,7 @@
         <span class="book-author">{{book.AuthorLastName}}, {{book.AuthorFirstName}}</span>
       </div>
       <div class="col-1">
-        <span class="counter" (click)="increaseCount(book)">+</span>
-        <!--<counter [counter]="count"></counter>-->
-        <span class="counter">{{book.Count}}</span>
-        <span class="counter" (click)="decreaseCount(book)">-</span>
+        <counter [counter]="book.Count" (change)="changeCounter($event, book)"></counter>
       </div>
       <div class="col-2">
         <span *ngIf="book.Discount" class="book-price">{{book.Discount * book.Count | currency:'EUR'}}</span><br />

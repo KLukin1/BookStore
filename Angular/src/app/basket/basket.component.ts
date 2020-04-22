@@ -14,7 +14,6 @@ export class BasketComponent implements OnInit {
     books: BasketItem[] = [];
     prices: number[];
     totalPrice: number;
-    counter: number;
 
     constructor(private bookService: BookService, private basketService: BasketService,
         private notifier: NotifierService) { }
@@ -50,33 +49,33 @@ export class BasketComponent implements OnInit {
             } else {
                 this.prices.push(book.Price * book.Count);
             }
-            this.counter = book.Count;
         }
         for (let price of this.prices) {
             this.totalPrice += price;
         }
     }
 
-    increaseCount(book: BasketItem) {
-        book.Count += 1;
-        this.calculatePrices();
-        this.basketService.changeCount(book).subscribe(
-            result => {
-                this.notifier.notify("info", "Basket is updated");
-            })
-    }
 
-    decreaseCount(book: BasketItem) {
-        if (book.Count == 1) {
-            book.Count = 1;
-        } else {
-            book.Count -= 1;
+    changeCounter(c: boolean, book: BasketItem) {
+        if (c == true) {
+            book.Count += 1;
+            this.calculatePrices();
+            this.basketService.changeCount(book).subscribe(
+                result => {
+                    this.notifier.notify("info", "Basket is updated");
+                })
         }
-        this.calculatePrices();
-        this.basketService.changeCount(book).subscribe(
-            result => {
-                this.notifier.notify("info", "Basket is updated");
-
-            })
+        else {
+            if (book.Count == 1) {
+                book.Count = 1;
+            } else {
+                book.Count -= 1;
+            }
+            this.calculatePrices();
+            this.basketService.changeCount(book).subscribe(
+                result => {
+                    this.notifier.notify("info", "Basket is updated");
+                })
+        }
     }
 }
