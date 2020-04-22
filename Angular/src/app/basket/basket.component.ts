@@ -30,10 +30,11 @@ export class BasketComponent implements OnInit {
             })
     }
 
-    deleteFromBasket(basketItemId: number) {
-        this.basketService.deleteFromBasket(basketItemId).subscribe(
+    deleteFromBasket(book: BasketItem) {
+        book.Count = 0;
+        this.basketService.changeCount(book).subscribe(
             response => {
-                this.books = this.books.filter(x => x.BasketItemId != basketItemId);
+                this.books = this.books.filter(x => x.BasketItemId != book.BasketItemId);
                 this.calculatePrices();
                 this.notifier.notify("success", "Book was removed from the basket");
             })

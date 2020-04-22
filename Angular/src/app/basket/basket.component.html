@@ -4,7 +4,7 @@
   <div class="basket-item" *ngFor="let book of books">
     <div class="row">
       <div class="col-2">
-        <button (click)="deleteFromBasket(book.BasketItemId)" type="button" class="btn btn-sm"><i class="fa fa-trash"></i></button>
+        <button (click)="deleteFromBasket(book)" type="button" class="btn btn-sm"><i class="fa fa-trash"></i></button>
       </div>
       <div class="col-2">
         <a [routerLink]="['/books', book.BookId]"><img src="http://localhost:50000/{{book.Image}}" class="book-img" /></a>

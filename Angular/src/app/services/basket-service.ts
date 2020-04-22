@@ -21,11 +21,6 @@ export class BasketService {
             .pipe(map(response => <BasketItem[]>response));
     }
 
-    deleteFromBasket(basketItemId: number): Observable<boolean> {
-        return this.httpClient.delete('http://localhost:50000/api/basket/' + basketItemId)
-            .pipe(map(response => <boolean>response));
-    }
-
     changeCount(book: BasketItem): Observable<BasketItem> {
         return this.httpClient.put('http://localhost:50000/api/basket/basketItem', book)
             .pipe(map(response => <BasketItem>response));

@@ -48,11 +48,21 @@ namespace API.Controllers
                 else
                 {
                     var basket = db.Baskets.FirstOrDefault(x => x.UserId == loggedInUserId && x.IsPayed != true);
-                    var newItem = new BasketItem();
-                    newItem.BasketId = basket.Id;
-                    newItem.BookId = bookModel.BookId;
-                    newItem.Count = bookModel.Count;
-                    db.BasketItems.Add(newItem);
+                    var itemExists = db.BasketItems.Any(x => x.BookId == bookModel.BookId && x.BasketId == basket.Id);
+                    
+                    if (itemExists)
+                    {
+                        var item = db.BasketItems.FirstOrDefault(x => x.BookId == bookModel.BookId);
+                        item.Count += bookModel.Count;
+                    }
+                    else
+                    {
+                        var newItem = new BasketItem();
+                        newItem.BasketId = basket.Id;
+                        newItem.BookId = bookModel.BookId;
+                        newItem.Count = bookModel.Count;
+                        db.BasketItems.Add(newItem);
+                    }
                     db.SaveChanges();
                 }
 
@@ -95,24 +105,6 @@ namespace API.Controllers
                                                     on Book.AuthorId = Author.Id " + where, parameters.ToArray()).ToList();
 
                 return list;
-            }
-        }
-
-        [HttpDelete]
-        [Route("{itemId:int}")]
-        public IHttpActionResult DeleteFromBasket(int itemId)
-        {
-            return Ok(DeleteItemFromBasket(itemId));
-        }
-
-        public bool DeleteItemFromBasket(int itemId)
-        {
-            using (var db = new BookStoreContext())
-            {
-                var item = db.BasketItems.FirstOrDefault(x => x.Id == itemId);
-                db.BasketItems.Remove(item);
-                db.SaveChanges();
-                return true;
             }
         }
 
