@@ -24,7 +24,7 @@ namespace API.Controllers
             return Ok(PostBookToBasket(bookIdModel));
         }
 
-        public bool PostBookToBasket(BookIdModel bookId)
+        public bool PostBookToBasket(BookIdModel bookModel)
         {
             using (var db = new BookStoreContext())
             {
@@ -40,8 +40,8 @@ namespace API.Controllers
 
                     var newItem = new BasketItem();
                     newItem.BasketId = newBasket.Id;
-                    newItem.BookId = bookId.BookId;
-                    newItem.Count = 1;
+                    newItem.BookId = bookModel.BookId;
+                    newItem.Count = bookModel.Count;
                     db.BasketItems.Add(newItem);
                     db.SaveChanges();
                 }
@@ -50,8 +50,8 @@ namespace API.Controllers
                     var basket = db.Baskets.FirstOrDefault(x => x.UserId == loggedInUserId && x.IsPayed != true);
                     var newItem = new BasketItem();
                     newItem.BasketId = basket.Id;
-                    newItem.BookId = bookId.BookId;
-                    newItem.Count = 1;
+                    newItem.BookId = bookModel.BookId;
+                    newItem.Count = bookModel.Count;
                     db.BasketItems.Add(newItem);
                     db.SaveChanges();
                 }

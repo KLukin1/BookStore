@@ -11,8 +11,8 @@ export class BasketService {
 
     constructor(private httpClient: HttpClient) { }
 
-    addBookToDB(id: number): Observable<number> {
-        return this.httpClient.post('http://localhost:50000/api/basket', { BookId: id })
+    addBookToDB(id: number, count: number): Observable<number> {
+        return this.httpClient.post('http://localhost:50000/api/basket', { BookId: id, Count: count })
             .pipe(map(response => <number>response));
     }
 

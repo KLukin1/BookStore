@@ -14,7 +14,8 @@
     <a href=""><span class="author-text">{{book.AuthorLastName}}, {{book.AuthorFirstName}}</span></a>
     <span class="price-text" [ngClass]="{'discount': book.Discount}">{{book.Price | currency:"EUR"}}</span>
     <span class="price-text" *ngIf="book.Discount">{{book.Discount | currency:"EUR"}}</span>
-    <button type="button" (click)="addToBasket()" class="btn btn-dark">Add to Basket</button>
+    <counter [counter]="count" (change)="changeCount($event)"></counter>
+    <button type="button" (click)="addToBasket(book.BookId, count)" class="btn btn-dark">Add to Basket</button>
   </div>
 </div>
 
