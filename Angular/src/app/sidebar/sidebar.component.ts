@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../services/category-service';
 import { Category, CategoryUI } from '../models/category-model';
-import { Book } from '../models/book-model';
 
 @Component({
     selector: 'sidebar',

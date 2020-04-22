@@ -3,14 +3,14 @@
   <span>Shop by Category</span>
   <br /><br />
   <div *ngFor="let category of categoryUI" class="categories">
-    <a href="/books;categoryName={{category.CategoryName}}">
+    <a [routerLink]="['/books', {categoryName: category.CategoryName}]">
       {{category.CategoryName}}
     </a>
     <i class="fa fa-chevron-down" (click)="dropdown(category)"></i>
 
     <div *ngIf="selectedCategory.CategoryName == category.CategoryName">
         <div *ngFor="let author of category.Authors" class="authors">
-          <a href="/books;categoryName={{category.CategoryName}};author={{getLastName(author)}}">
+          <a [routerLink]="['/books', {categoryName: category.CategoryName, author: getLastName(author)}]">
             {{author}}
           </a>
         </div>

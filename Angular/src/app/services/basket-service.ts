@@ -26,7 +26,6 @@ export class BasketService {
             .pipe(map(response => <BasketItem>response));
     }
 
-    //nije realizirano
 
     private basketNum = new BehaviorSubject<number>(0);
 

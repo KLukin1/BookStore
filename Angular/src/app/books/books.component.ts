@@ -4,7 +4,6 @@ import { Book } from '../models/book-model';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { BasketService } from '../services/basket-service';
-import { BasketItem } from '../models/basket-model';
 
 @Component({
     selector: 'books',
@@ -18,6 +17,7 @@ export class BooksComponent implements OnInit {
     author: string;
     buttonText: string = 'Sort By  <span class="caret"></span>';
     count1: number = 1;
+    basketNum: number;
 
     constructor(private bookService: BookService, private basketService: BasketService,
         private route: ActivatedRoute, private router: Router, private notifier: NotifierService) {

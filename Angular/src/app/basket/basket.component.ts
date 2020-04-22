@@ -14,6 +14,7 @@ export class BasketComponent implements OnInit {
     books: BasketItem[] = [];
     prices: number[];
     totalPrice: number;
+    basketNum: number;
 
     constructor(private bookService: BookService, private basketService: BasketService,
         private notifier: NotifierService) { }
@@ -27,7 +28,14 @@ export class BasketComponent implements OnInit {
             response => {
                 this.books = response;
                 this.calculatePrices();
+                this.passBasketNum();
             })
+    }
+
+    passBasketNum() {
+        this.basketNum = this.books.length;
+        this.basketService.passBasketNum(this.basketNum);
+        console.log(this.books.length);
     }
 
     deleteFromBasket(book: BasketItem) {
@@ -36,6 +44,7 @@ export class BasketComponent implements OnInit {
             response => {
                 this.books = this.books.filter(x => x.BasketItemId != book.BasketItemId);
                 this.calculatePrices();
+                this.passBasketNum();
                 this.notifier.notify("success", "Book was removed from the basket");
             })
     }

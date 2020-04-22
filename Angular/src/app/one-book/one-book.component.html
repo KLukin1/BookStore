@@ -1,8 +1,8 @@
 
 <div class="legend">
-  <a href="">Home</a>
+  <a [routerLink]="['/home']">Home</a>
   &nbsp;/&nbsp;
-  <a href="/books;categoryName={{book.CategoryName}}">{{book.CategoryName}}</a>
+  <a [routerLink]="['/books', {categoryName: book.CategoryName}]">{{book.CategoryName}}</a>
 </div>
 
 <div class="row">
@@ -11,10 +11,12 @@
   </div>
   <div class="col text-wrap">
     <span class="title-text">{{book.Title}}</span>
-    <a href=""><span class="author-text">{{book.AuthorLastName}}, {{book.AuthorFirstName}}</span></a>
+    <a [routerLink]="['/books', {author: book.AuthorLastName}]"><span class="author-text">{{book.AuthorLastName}}, {{book.AuthorFirstName}}</span></a>
     <span class="price-text" [ngClass]="{'discount': book.Discount}">{{book.Price | currency:"EUR"}}</span>
     <span class="price-text" *ngIf="book.Discount">{{book.Discount | currency:"EUR"}}</span>
-    <counter [counter]="count" (change)="changeCount($event)"></counter>
+    <div class="counter">
+      <counter [counter]="count" (change)="changeCount($event)"></counter>
+    </div>
     <button type="button" (click)="addToBasket(book.BookId, count)" class="btn btn-dark">Add to Basket</button>
   </div>
 </div>
