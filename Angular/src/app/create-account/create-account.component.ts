@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormGroupDirective, Validators } from '@angular
 import { UserService } from '../services/user-service';
 import { NotifierService } from 'angular-notifier';
 import { AccountValidators } from '../services/account.validators';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class CreateAccountComponent implements OnInit {
 
     registerForm;
 
-    constructor(private userService: UserService, private notifier: NotifierService) { }
+    constructor(private userService: UserService, private notifier: NotifierService,
+        private router: Router) { }
 
     ngOnInit() {
         this.registerForm = new FormGroup({
@@ -37,7 +39,7 @@ export class CreateAccountComponent implements OnInit {
         this.userService.createUser(f.value).subscribe(
             result => {
                 this.notifier.notify("success", "Hello " + f.value.FirstName);
-                f.reset();
+                this.router.navigateByUrl('/home');
             })
     }
 
