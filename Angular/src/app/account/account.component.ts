@@ -13,7 +13,7 @@ export class AccountComponent implements OnInit {
 
     signInForm;
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService) { }
 
     ngOnInit() {
         this.signInForm = new FormGroup({
@@ -36,9 +36,11 @@ export class AccountComponent implements OnInit {
     }
 
     onSignIn(f) {
-        this.userService.login(f.value).subscribe(
+        this.userService.loginGET().subscribe(
             result => {
-                console.log(result);
+            })
+        this.userService.loginPOST(f.value).subscribe(
+            result => {
             })
     }
 }

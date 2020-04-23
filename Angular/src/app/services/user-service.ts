@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, catchError, retry } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreatedUser } from '../models/created-user-model';
+import { CreatedUser, UserLogin } from '../models/created-user-model';
 
 @Injectable({
     providedIn: 'root'
@@ -16,8 +16,13 @@ export class UserService {
             .pipe(map(response => <CreatedUser>response));
     }
 
-    login(user: CreatedUser): Observable<CreatedUser> {
+    loginGET(): Observable<UserLogin> {
+        return this.httpClient.get('http://localhost:50000/api/login')
+            .pipe(map(response => <UserLogin>response));
+    }
+
+    loginPOST(user: UserLogin): Observable<any> {
         return this.httpClient.post('http://localhost:50000/api/login', user)
-            .pipe(map(response => <CreatedUser>response));
+            .pipe(map(response => <any>response));
     }
 }

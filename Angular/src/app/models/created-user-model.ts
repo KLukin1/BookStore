@@ -6,3 +6,8 @@ export class CreatedUser {
     Password: string;
     DeliveryAddress: string;
 }
+
+export class UserLogin {
+    Email: string;
+    Password: string;
+}
