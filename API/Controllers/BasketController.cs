@@ -132,5 +132,35 @@ namespace API.Controllers
                 return itemToUpdate;
             }
         }
+
+        [HttpGet]
+        [Route("count")]
+        public IHttpActionResult GetBasketCount()
+        {
+            return Ok(GetBasketItemCount());
+        }
+
+        public int GetBasketItemCount()
+        {
+            using(var db = new BookStoreContext())
+            {
+                string where = "";
+                var parameters = new List<SqlParameter> { };
+
+                if (loggedInUserId > 0)
+                {
+                    where = $"where Basket.UserId = @loggedInUserId";
+                    parameters.Add(new SqlParameter("@loggedInUserId", loggedInUserId.ToString().Trim()));
+
+                }
+                var itemSum = db.Database.SqlQuery<int>(@"select BasketItem.[Count]
+                                from BasketItem
+                                inner join Basket
+                                on BasketItem.BasketId = Basket.Id 
+                                inner join [User]
+                                on Basket.UserId = [User].Id " + where, parameters.ToArray());
+                return itemSum.Sum();
+            }
+        }
     }
 }

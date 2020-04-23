@@ -17,7 +17,6 @@ export class BooksComponent implements OnInit {
     author: string;
     buttonText: string = 'Sort By  <span class="caret"></span>';
     count1: number = 1;
-    basketNum: number;
 
     constructor(private bookService: BookService, private basketService: BasketService,
         private route: ActivatedRoute, private router: Router, private notifier: NotifierService) {
@@ -45,6 +44,10 @@ export class BooksComponent implements OnInit {
                 this.books = result;
             }
         )
+    }
+
+    sendBasketNum() {
+        this.basketService.sendBasketNum();
     }
 
     sortAZ() {
@@ -99,6 +102,7 @@ export class BooksComponent implements OnInit {
         this.basketService.addBookToDB(id, count).subscribe(
             result => {
                 this.notifier.notify('success', 'Book was added to your basket');
+                this.sendBasketNum();
             }, () => {
                 this.notifier.notify('error', 'Error!');
             }

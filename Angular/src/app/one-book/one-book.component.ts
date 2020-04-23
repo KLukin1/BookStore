@@ -36,10 +36,15 @@ export class OneBookComponent implements OnInit {
         this.basketService.addBookToDB(id, count).subscribe(
             result => {
                 this.notifier.notify('success', 'Book was added to your basket');
+                this.sendBasketNum();
             }, () => {
                 this.notifier.notify('error', 'Error!');
             }
         )
+    }
+
+    sendBasketNum() {
+        this.basketService.sendBasketNum();
     }
 
     changeCount(c: number) {

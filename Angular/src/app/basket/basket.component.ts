@@ -28,14 +28,12 @@ export class BasketComponent implements OnInit {
             response => {
                 this.books = response;
                 this.calculatePrices();
-                this.passBasketNum();
+                this.sendBasketNum();
             })
     }
 
-    passBasketNum() {
-        this.basketNum = this.books.length;
-        this.basketService.passBasketNum(this.basketNum);
-        console.log(this.books.length);
+    sendBasketNum() {
+        this.basketService.sendBasketNum();
     }
 
     deleteFromBasket(book: BasketItem) {
@@ -44,7 +42,7 @@ export class BasketComponent implements OnInit {
             response => {
                 this.books = this.books.filter(x => x.BasketItemId != book.BasketItemId);
                 this.calculatePrices();
-                this.passBasketNum();
+                this.sendBasketNum();
                 this.notifier.notify("success", "Book was removed from the basket");
             })
     }

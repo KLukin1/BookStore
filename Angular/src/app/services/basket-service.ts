@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { BasketItem } from '../models/basket-model';
 
 @Injectable({
@@ -27,13 +27,18 @@ export class BasketService {
     }
 
 
-    private basketNum = new BehaviorSubject<number>(0);
-
-    getBasketNum(): Observable<number> {
-        return this.basketNum.asObservable();
+    getBasketCountApi(): Observable<number> {
+        return this.httpClient.get('http://localhost:50000/api/basket/count')
+            .pipe(map(response => <number>response));
     }
 
-    passBasketNum(basketNum: number) {
-        this.basketNum.next(basketNum);
+    private subject = new Subject<any>();
+
+    sendBasketNum() {
+        this.subject.next();
+    }
+
+    getBasketNum(): Observable<any> {
+        return this.subject.asObservable();
     }
 }
