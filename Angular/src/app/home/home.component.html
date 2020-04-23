@@ -16,13 +16,13 @@
             <img class="image" src="http://localhost:50000/{{book.Image}}" />
             <mdb-card-body>
               <mdb-card-title>
-                <h4 class="title-text">{{book.Title}}</h4>
+                <h4 class="title-text" [routerLink]="['/books', book.BookId]">{{book.Title}}</h4>
               </mdb-card-title>
               <div class="row price">
                 <span class="col price-text" [ngClass]="{'discount': book.Discount}">{{book.Price | currency:"EUR"}}</span>
                 <span class="col price-text" *ngIf="book.Discount">{{book.Discount | currency:"EUR"}}</span>
               </div>
-              <a href="" mdbBtn class="btn btn-sm btn-dark">Add to Basket</a>
+              <a (click)="addToBasket(book.BookId, count1)"  mdbBtn class="btn btn-sm btn-dark">Add to Basket</a>
             </mdb-card-body>
           </mdb-card>
         </div>

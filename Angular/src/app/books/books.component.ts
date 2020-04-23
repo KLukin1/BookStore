@@ -103,8 +103,6 @@ export class BooksComponent implements OnInit {
             result => {
                 this.notifier.notify('success', 'Book was added to your basket');
                 this.sendBasketNum();
-            }, () => {
-                this.notifier.notify('error', 'Error!');
             }
         )
     }

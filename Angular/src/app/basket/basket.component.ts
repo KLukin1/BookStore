@@ -70,6 +70,7 @@ export class BasketComponent implements OnInit {
         this.basketService.changeCount(book).subscribe(
             result => {
                 this.notifier.notify("info", "Basket is updated");
+                this.basketService.sendBasketNum();
             })
     }
 }
