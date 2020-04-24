@@ -35,10 +35,6 @@ h2 {
   max-width: 600px;
   margin: 0 auto;
 
-  .controls-top{
-    display: none;
-  }
-
   .item {
     height: 500px;
     text-align: center;
@@ -129,6 +125,63 @@ h2 {
     p {
       font-size: 14px;
       color: #777;
+    }
+  }
+}
+
+//large
+@media screen and (max-width: 1200px) and (min-width: 992px) {
+
+  .subscription {
+    span {
+      margin-right: 50px;
+    }
+
+    input {
+      width: 150px;
+    }
+  }
+}
+
+//medium
+@media screen and (max-width: 991px) and (min-width: 768px) {
+
+  .subscription {
+    span {
+      margin-right: 40px;
+    }
+
+    button {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
+//small
+@media screen and (max-width: 767px) and (min-width: 577px) {
+
+  .subscription {
+    text-align: center;
+
+    span {
+      margin: 0
+    }
+  }
+}
+
+//xsmall
+@media screen and (max-width: 576px) {
+
+  .top-space {
+    height: 10px;
+  }
+
+  .subscription {
+    text-align: center;
+
+    span {
+      margin: 0
     }
   }
 }

@@ -26,6 +26,9 @@ export class AccountComponent implements OnInit {
                 AccountValidators.cannotContainSpace
             ])
         });
+        this.userService.loginGET().subscribe(
+            result => {
+            });
     }
 
     get getEmail() {
@@ -36,9 +39,6 @@ export class AccountComponent implements OnInit {
     }
 
     onSignIn(f) {
-        this.userService.loginGET().subscribe(
-            result => {
-            })
         this.userService.loginPOST(f.value).subscribe(
             result => {
             })

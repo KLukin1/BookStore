@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CategoryService } from '../services/category-service';
 import { Category, CategoryUI } from '../models/category-model';
 
@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
     selectedCategory: CategoryUI = new CategoryUI();
     authorLastName: string;
     selected: number = 0;
+    @Output() closeHambi = new EventEmitter();
 
     constructor(private categoryService: CategoryService) { }
 
@@ -52,5 +53,9 @@ export class SidebarComponent implements OnInit {
     getLastName(author: string) {
         var i = author.indexOf(",");
         return author.slice(0, i);
+    }
+
+    closeHamburger() {
+        this.closeHambi.emit(false);
     }
 }

@@ -87,3 +87,46 @@ h2 {
     margin-top: 10px;
   }
 }
+
+//small
+@media screen and (max-width: 767px) and (min-width: 577px) {
+
+  .basket-item {
+    .counter {
+      width: 30px;
+    }
+  }
+}
+
+//xsmall
+@media screen and (max-width: 576px) {
+
+  h2{
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+
+  .basket-item {
+    .col-xs-2 {
+      position: relative;
+      width: 100%;
+      padding-right: 10px;
+      padding-left: 10px;
+      flex: 0 0 16.666667%;
+      max-width: 16.666667%;
+    }
+
+    .col-xs-4 {
+      position: relative;
+      width: 100%;
+      padding-right: 10px;
+      padding-left: 10px;
+      flex: 0 0 33.333333%;
+      max-width: 33.333333%;
+    }
+
+    .counter {
+      width: 30px;
+    }
+  }
+}

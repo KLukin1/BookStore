@@ -92,3 +92,79 @@ footer {
     }
   }
 }
+
+//large
+@media screen and (max-width: 1200px) and (min-width: 992px) {
+  .top-menu {
+    .top-menu-text {
+      max-width: 920px;
+    }
+  }
+
+  .screen-body {
+    max-width: 890px;
+  }
+}
+
+//medium
+@media screen and (max-width: 991px) and (min-width: 768px) {
+
+  .top-menu {
+    .top-menu-text {
+      max-width: 680px;
+    }
+  }
+
+  .screen-body {
+    max-width: 650px;
+
+    .sidebar-md-sm-hide {
+      display: none;
+    }
+  }
+}
+
+//small
+@media screen and (max-width: 767px) and (min-width: 577px) {
+
+  .top-menu {
+    .top-menu-text {
+      max-width: 530px;
+    }
+  }
+
+  .screen-body {
+    max-width: 500px;
+
+    .sidebar-md-sm-hide {
+      display: none;
+    }
+  }
+}
+
+//xsmall
+@media screen and (max-width: 576px) {
+
+  .top-menu {
+    display: none;
+  }
+
+  .screen-body {
+    width: 100vw;
+    max-width: 100%;
+    margin: 0;
+
+    /*.row {
+      margin-right: 0px !important;
+      margin-left: 0px !important;*/
+
+      .body-content {
+        padding: 0;
+      }
+
+      .sidebar-md-sm-hide {
+        display: none;
+      }
+    }
+  }
+/*}*/

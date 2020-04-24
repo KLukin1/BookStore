@@ -39,7 +39,6 @@ namespace API.Controllers
 
                     if (hashedInput == password)
                     {
-                        Console.WriteLine(user.Email, user.Password);
                         FormsAuthentication.SetAuthCookie(loginModel.Email, false);
                         return Ok();
                     }

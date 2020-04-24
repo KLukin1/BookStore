@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from '../services/basket-service';
-import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -11,6 +10,7 @@ import { Subscription } from 'rxjs';
 export class MenuComponent implements OnInit {
 
     basketNum: number;
+    isHamburgerClicked: boolean = false;
 
     constructor(private basketService: BasketService) { this.getBasketCount(); }
 
@@ -32,8 +32,8 @@ export class MenuComponent implements OnInit {
             })
     }
 
-    autocomplete(inputSearch: string) {
-
+    showSideMenu(bool: boolean) {
+        this.isHamburgerClicked = bool;
     }
 }
 

@@ -1,4 +1,8 @@
 
+.sidebar-md-sm-show {
+  display: none;
+}
+
 .dropdown-button {
   margin-bottom: 20px;
   color: #fff;
@@ -78,5 +82,38 @@
   button {
     margin-top: 10px;
     background-color: #2b2b2b;
+  }
+}
+
+//large
+@media screen and (max-width: 1200px) and (min-width: 992px) {
+}
+
+//medium
+@media screen and (max-width: 991px) and (min-width: 768px) {
+
+  .sidebar-md-sm-show {
+    display: block;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+  }
+}
+
+//small
+@media screen and (max-width: 767px) and (min-width: 577px) {
+
+  .sidebar-md-sm-show {
+    display: block;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .book-wrapper {
+    height: 370px;
+
+    .book-img {
+      width: 120px;
+      height: 190px;
+    }
   }
 }

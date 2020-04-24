@@ -3,20 +3,22 @@
   <h2>Basket</h2>
   <div class="basket-item" *ngFor="let book of books">
     <div class="row">
-      <div class="col-2">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <button (click)="deleteFromBasket(book)" type="button" class="btn btn-sm"><i class="fa fa-trash"></i></button>
       </div>
-      <div class="col-2">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <a [routerLink]="['/books', book.BookId]"><img src="http://localhost:50000/{{book.Image}}" class="book-img" /></a>
       </div>
-      <div class="col-5">
+      <div class="col-xl-5 col-lg-5 col-md-5 col-sm-4 col-xs-4">
         <a [routerLink]="['/books', book.BookId]"><span class="book-title">{{book.Title}}</span></a>
         <span class="book-author">{{book.AuthorLastName}}, {{book.AuthorFirstName}}</span>
       </div>
-      <div class="col-1">
-        <counter [counter]="book.Count" (change)="changeCounter($event, book)"></counter>
+      <div class="col-xl-1 col-lg-1 col-md-1 col-sm-2 col-xs-2">
+        <div class="counter">
+          <counter [counter]="book.Count" (change)="changeCounter($event, book)"></counter>
+        </div>
       </div>
-      <div class="col-2">
+      <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
         <span *ngIf="book.Discount" class="book-price">{{book.Discount * book.Count | currency:'EUR'}}</span><br />
         <span class="book-price" [ngClass]="{'discount': book.Discount}">{{book.Price * book.Count | currency:'EUR'}}</span>
       </div>
