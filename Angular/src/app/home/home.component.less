@@ -29,65 +29,6 @@ h2 {
   text-align: center;
 }
 
-
-.carousel-body {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-
-  .item {
-    height: 500px;
-    text-align: center;
-
-    .image {
-      width: 150px;
-      height: 220px;
-      margin: 0 auto;
-      padding-top: 10px;
-    }
-
-    span {
-      display: block;
-      width: 150px;
-      margin: 0 auto;
-      padding-top: 5px;
-    }
-
-    .title-text {
-      font-size: 15px;
-      cursor: pointer;
-      height: 49px;
-
-      &:hover {
-        color: #777;
-      }
-    }
-
-    .author-text {
-      font-size: 14px;
-      color: #777;
-    }
-
-    .price {
-      width: 150px;
-      margin: 0 auto;
-
-      .price-text {
-        font-size: 18px;
-        color: #521735;
-        padding: 0;
-        padding-top: 5px;
-      }
-
-      .discount {
-        text-decoration: line-through;
-        font-size: 16px;
-        color: #888;
-      }
-    }
-  }
-}
-
 .subscription {
   background-color: #ddd;
   padding: 5px;
@@ -182,6 +123,30 @@ h2 {
 
     span {
       margin: 0
+    }
+  }
+}
+
+//xxsmall
+@media screen and (max-width: 399px) {
+
+  .subscription {
+    font-size: 14px;
+
+    button {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+
+  .description {
+    margin-top: 0;
+
+    .col-xs {
+      position: relative;
+      width: 100%;
+      flex: 0 0 100%;
+      max-width: 100%;
     }
   }
 }

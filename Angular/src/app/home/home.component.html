@@ -6,32 +6,9 @@
 </div>
 
 <h2>Our Recommendation</h2>
-<!--<div class="carousel-body">
-  <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'"
-                [animation]="'slide'">
-    <mdb-carousel-item *ngFor="let books of slides; let i = index" class="item">
-      <div class="row">
-        <div class="col-md-4" [ngClass]="{'d-none d-md-block': cardIndex !== 0}"
-             *ngFor="let book of books; let cardIndex = index">
-          <mdb-card class="my-1">
-            <img class="image" src="http://localhost:50000/{{book.Image}}" />
-            <mdb-card-body>
-              <mdb-card-title>
-                <h4 class="title-text" [routerLink]="['/books', book.BookId]">{{book.Title}}</h4>
-              </mdb-card-title>
-              <div class="row price">
-                <span class="col price-text" [ngClass]="{'discount': book.Discount}">{{book.Price | currency:"EUR"}}</span>
-                <span class="col price-text" *ngIf="book.Discount">{{book.Discount | currency:"EUR"}}</span>
-              </div>
-              <a (click)="addToBasket(book.BookId, count1)"  mdbBtn class="btn btn-sm btn-dark">Add to Basket</a>
-            </mdb-card-body>
-          </mdb-card>
-        </div>
-      </div>
-    </mdb-carousel-item>
-  </mdb-carousel>
-</div>-->
-
+<br />
+<carousel></carousel>
+<br />
 <div class="subscription">
   <span> Join Our Mailing List For Special Offers!</span>
   <input type="text" placeholder=" Email" />
@@ -39,17 +16,17 @@
 </div>
 
 <div class="description row">
-  <div class="col">
+  <div class="col col-xs">
     <i class="fa fa-plane"></i>
     <span>Free Nationwide Shipping</span>
     <p>Free shipping for all nationwide orders over €20! All orders are shipped via An Post tracked services.</p>
   </div>
-  <div class="col">
+  <div class="col col-xs">
     <i class="fa fa-money-bill-wave"></i>
     <span>Money Back Guarantee</span>
     <p>Bought the wrong books? Don't worry! We will refund if you have the receipt and the book is not damaged.</p>
   </div>
-  <div class="col">
+  <div class="col col-xs">
     <i class="fa fa-credit-card"></i>
     <span>Secure Online Payment</span>
     <p>All Payments are made through Global Payments Servers. We do not store any Credit Card details.</p>

@@ -3,26 +3,22 @@
   <a routerLink="home">
     <img class="main-logo" src="http://localhost:50000/images/logo-purple.png" />
   </a>
-  <div class="search-div">
-    <input placeholder=" Search by title or author..." type="text" />
-    <button type="button" class="btn btn-sm"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</button>
-  </div>
+  <search class="search"></search>
 </div>
 <br />
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div *ngIf="isHamburgerClicked" class="show-sidemenu">
-    <a (click)="showSideMenu(false)" class="navbar-brand"><i class="fa fa-times"></i></a>
-    <sidebar class="sidebar-body" (closeHambi)="showSideMenu($event)"></sidebar>
-    <div class="search-div">
-      <input placeholder=" Search by title or author..." type="text" />
-      <button type="button" class="btn btn-sm"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</button>
+    <div class="sidemenu-body">
+      <a (click)="showSideMenu(false)" class="navbar-brand"><i class="fa fa-times"></i></a>
+      <sidebar (closeHambi)="showSideMenu($event)"></sidebar>
+      <search></search>
     </div>
   </div>
   <a (click)="showSideMenu(true)" class="navbar-brand navbar-hamburger"><i class="fa fa-bars"></i></a>
   <a routerLink="home" class="navbar-brand"><i class="fa fa-home"></i>&nbsp;&nbsp;Home</a>
   <a routerLink="books" class="navbar-brand"><i class="fa fa-book"></i>&nbsp;&nbsp;Books</a>
-  <a routerLink="account" class="navbar-brand"><i class="fa fa-user"></i>&nbsp;&nbsp;My Account</a>
+  <a routerLink="/account" class="navbar-brand"><i class="fa fa-user"></i>&nbsp;&nbsp;My Account</a>
   <a routerLink="basket" class="navbar-brand">
     <i class="fa fa-shopping-basket">
       ({{basketNum}})

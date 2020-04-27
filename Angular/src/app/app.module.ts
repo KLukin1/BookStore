@@ -14,8 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { NotifierModule } from "angular-notifier";
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CounterComponent } from './counter/counter.component';
+import { SearchComponent } from './search/search.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 
 @NgModule({
@@ -30,7 +31,9 @@ import { CounterComponent } from './counter/counter.component';
         OneBookComponent,
         ForgotPassComponent,
         CreateAccountComponent,
-        CounterComponent
+        CounterComponent,
+        SearchComponent,
+        CarouselComponent
     ],
     imports: [
         BrowserModule,
@@ -47,8 +50,7 @@ import { CounterComponent } from './counter/counter.component';
                     position: 'top'
                 }
             }
-        }),
-        MDBBootstrapModule.forRoot()
+        })
     ],
     providers: [],
     bootstrap: [AppComponent]

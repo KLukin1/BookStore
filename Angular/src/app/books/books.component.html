@@ -1,8 +1,8 @@
 
-<div class="sidebar-md-sm-show">
-  <sidebar></sidebar>
-</div>
 <div class="container">
+  <div class="row sidebar-md-sm-show">
+    <sidebar></sidebar>
+  </div>
   <div class="row">
     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-8">
       <span>{{books.length}} Results</span>
@@ -23,7 +23,7 @@
   </div>
 
   <div class="row">
-    <div class="col-4" *ngFor="let book of books">
+    <div class="col-4 col-xs-6 one-book" *ngFor="let book of books">
       <div class="book-wrapper">
         <a [routerLink]="['/books', book.BookId]"><img src="http://localhost:50000/{{book.Image}}" class="book-img" /></a>
         <a [routerLink]="['/books', book.BookId]"><span class="title-text">{{book.Title}}</span></a>

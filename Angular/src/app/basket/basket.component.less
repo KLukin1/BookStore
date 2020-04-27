@@ -16,6 +16,8 @@ h2 {
   }
 
   button {
+    padding-left: 15px;
+    padding-right: 15px;
 
     i {
       font-size: 12px;
@@ -99,9 +101,9 @@ h2 {
 }
 
 //xsmall
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 576px) and (min-width: 400px) {
 
-  h2{
+  h2 {
     padding-top: 20px;
     padding-left: 20px;
   }
@@ -110,23 +112,62 @@ h2 {
     .col-xs-2 {
       position: relative;
       width: 100%;
-      padding-right: 10px;
-      padding-left: 10px;
-      flex: 0 0 16.666667%;
-      max-width: 16.666667%;
+      padding-right: 5px;
+      padding-left: 5px;
+      flex: 0 0 15%;
+      max-width: 15%;
     }
 
     .col-xs-4 {
       position: relative;
       width: 100%;
-      padding-right: 10px;
-      padding-left: 10px;
-      flex: 0 0 33.333333%;
-      max-width: 33.333333%;
+      padding-right: 5px;
+      padding-left: 15px;
+      flex: 0 0 40%;
+      max-width: 40%;
     }
 
     .counter {
       width: 30px;
+    }
+  }
+}
+
+//xxsmall
+@media screen and (max-width: 399px) {
+
+  h2 {
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+
+  .basket-item {
+    .col-xs-2 {
+      position: relative;
+      width: 100%;
+      padding-right: 5px;
+      padding-left: 5px;
+      flex: 0 0 15%;
+      max-width: 15%;
+    }
+
+    .col-xs-4 {
+      position: relative;
+      width: 100%;
+      padding-right: 5px;
+      padding-left: 15px;
+      flex: 0 0 40%;
+      max-width: 40%;
+    }
+
+    .counter {
+      width: 25px;
+    }
+
+    .book-img{
+      padding-left: 10px;
+      width: 40px;
+      height: 50px;
     }
   }
 }

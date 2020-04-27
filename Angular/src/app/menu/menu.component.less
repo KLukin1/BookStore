@@ -3,32 +3,34 @@
     width: 250px;
   }
 
-  .search-div {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 0 auto auto;
+  .search {
+    .search-div {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 0 auto auto;
 
-    input {
-      width: 399px;
-      color: #777;
-    }
+      input {
+        width: 399px;
+        color: #777;
+      }
 
-    button {
-      background-color: #5f1d2b;
-      color: #fff;
-      padding: 7px 10px;
-      margin-right: 0;
+      button {
+        background-color: #5f1d2b;
+        color: #fff;
+        padding: 7px 10px;
+        margin-right: 0;
+      }
     }
   }
 }
 
 nav {
   box-shadow: 0 0 8px 0px #b6b6b6;
-  background-color: #f8f9fa !important;
+  background-color: #fff !important;
 
   a {
     margin-right: 50px;
-    border-bottom: solid 2px #f8f9fa;
+    border-bottom: solid 2px #fff;
     font-size: 18px;
     font-weight: 400;
 
@@ -116,7 +118,7 @@ nav {
       line-height: 0;
       font-size: 0;
       color: transparent;
-      padding: 0 30px;
+      padding: 0 20px;
       margin-right: 0;
 
       i {
@@ -138,25 +140,35 @@ nav {
       width: 100vw;
       height: 100vh;
 
-      .sidebar-body {
-        .sidebar-body {
-          width: 300px !important;
+      .sidemenu-body {
+        width: 280px;
+
+        .search-div {
+          padding: 30px 0;
+
+          input {
+            width: 233px;
+          }
+
+          button {
+            background-color: #5f1d2b;
+            color: #fff;
+            margin-right: 0;
+            padding-right: 15px;
+            padding-left: 15px;
+          }
         }
       }
+    }
+  }
+}
 
-      .search-div {
-        padding: 30px 0;
-        max-width: 400px;
+//xxsmall
+@media screen and (max-width: 399px) {
 
-        input {
-          width: 250px;
-        }
-
-        button {
-          background-color: #5f1d2b;
-          color: #fff;
-        }
-      }
+  nav {
+    a {
+      padding: 0 14px;
     }
   }
 }
