@@ -8,7 +8,7 @@ import { BasketComponent } from './basket/basket.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { BooksComponent } from './books/books.component';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { OneBookComponent } from './one-book/one-book.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
@@ -17,6 +17,8 @@ import { NotifierModule } from "angular-notifier";
 import { CounterComponent } from './counter/counter.component';
 import { SearchComponent } from './search/search.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { AuthGuard } from './authentication/authentication.component';
+import { AuthInterceptor } from './authentication/auth.interceptor';
 
 
 @NgModule({
@@ -52,7 +54,11 @@ import { CarouselComponent } from './carousel/carousel.component';
             }
         })
     ],
-    providers: [],
+    providers: [AuthGuard, {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+    }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

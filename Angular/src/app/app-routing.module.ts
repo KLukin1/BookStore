@@ -7,6 +7,7 @@ import { BooksComponent } from './books/books.component';
 import { OneBookComponent } from './one-book/one-book.component';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { AuthGuard } from './authentication/authentication.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'books', component: BooksComponent },
     { path: 'account', component: AccountComponent },
-    { path: 'basket', component: BasketComponent },
+    { path: 'basket', component: BasketComponent, canActivate: [AuthGuard] },
     { path: 'books/:id', component: OneBookComponent },
     { path: 'forgot-password', component: ForgotPassComponent },
     { path: 'create-account', component: CreateAccountComponent }

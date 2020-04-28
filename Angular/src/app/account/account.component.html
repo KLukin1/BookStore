@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col sign-in">
     <h2>Sign In</h2>
+    <div *ngIf="isLoginError" class="red-text">Incorrect Email or Password</div>
     <form #f="ngForm" [formGroup]="signInForm" (ngSubmit)="onSignIn(f)">
       <div>
         <label>Email:</label><br />

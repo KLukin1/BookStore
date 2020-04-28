@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -16,25 +17,25 @@ namespace API.Controllers
     [Authorize]
     public class BasketController : ApiController
     {
-        private int loggedInUserId = 1;
 
         [HttpPost]
         [Route("")]
         public IHttpActionResult PostBasket(BookIdModel bookIdModel)
         {
-            return Ok(PostBookToBasket(bookIdModel));
+            CurrentUser loginModel = GetCurrentUser();
+            return Ok(PostBookToBasket(bookIdModel, loginModel.UserId));
         }
 
-        public bool PostBookToBasket(BookIdModel bookModel)
+        public bool PostBookToBasket(BookIdModel bookModel, int userId)
         {
             using (var db = new BookStoreContext())
             {
-                var basketExists = db.Baskets.Any(x => x.UserId == loggedInUserId && x.IsPayed != true);
+                var basketExists = db.Baskets.Any(x => x.UserId == userId && x.IsPayed != true);
 
                 if (!basketExists)
                 {
                     var newBasket = new Basket();
-                    newBasket.UserId = loggedInUserId;
+                    newBasket.UserId = userId;
                     newBasket.IsPayed = false;
                     db.Baskets.Add(newBasket);
                     db.SaveChanges();
@@ -48,7 +49,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    var basket = db.Baskets.FirstOrDefault(x => x.UserId == loggedInUserId && x.IsPayed != true);
+                    var basket = db.Baskets.FirstOrDefault(x => x.UserId == userId && x.IsPayed != true);
                     var itemExists = db.BasketItems.Any(x => x.BookId == bookModel.BookId && x.BasketId == basket.Id);
                     
                     if (itemExists)
@@ -75,20 +76,35 @@ namespace API.Controllers
         [Route("")]
         public IHttpActionResult GetBasket()
         {
-            return Ok(GetBooksFromBasket());
+            CurrentUser loginModel = GetCurrentUser();
+            return Ok(GetBooksFromBasket(loginModel.UserId));
         }
 
-        public List<BasketGetApiModel> GetBooksFromBasket()
+        private CurrentUser GetCurrentUser()
+        {
+            var identityClaims = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identityClaims.Claims;
+            CurrentUser loginModel = new CurrentUser()
+            {
+                Email = identityClaims.FindFirst("Email").Value,
+                FirstName = identityClaims.FindFirst("FirstName").Value,
+                LastName = identityClaims.FindFirst("LastName").Value,
+                UserId = int.Parse(identityClaims.FindFirst("UserId").Value)
+            };
+            return loginModel;
+        }
+
+        public List<BasketGetApiModel> GetBooksFromBasket(int userId)
         {
             using (var db = new BookStoreContext())
             {
                 string where = "";
                 var parameters = new List<SqlParameter> { };
 
-                if (loggedInUserId > 0)
+                if (userId > 0)
                 {
                     where = $"where Basket.UserId = @loggedInUserId";
-                    parameters.Add(new SqlParameter("@loggedInUserId", loggedInUserId.ToString().Trim()));
+                    parameters.Add(new SqlParameter("@loggedInUserId", userId.ToString().Trim()));
 
                 }
                 var list = db.Database.SqlQuery<BasketGetApiModel>(@"select Basket.Id as BasketId, 
@@ -138,20 +154,21 @@ namespace API.Controllers
         [Route("count")]
         public IHttpActionResult GetBasketCount()
         {
-            return Ok(GetBasketItemCount());
+            CurrentUser loginModel = GetCurrentUser();
+            return Ok(GetBasketItemCount(loginModel.UserId));
         }
 
-        public int GetBasketItemCount()
+        public int GetBasketItemCount(int userId)
         {
             using(var db = new BookStoreContext())
             {
                 string where = "";
                 var parameters = new List<SqlParameter> { };
 
-                if (loggedInUserId > 0)
+                if (userId > 0)
                 {
                     where = $"where Basket.UserId = @loggedInUserId";
-                    parameters.Add(new SqlParameter("@loggedInUserId", loggedInUserId.ToString().Trim()));
+                    parameters.Add(new SqlParameter("@loggedInUserId", userId.ToString().Trim()));
 
                 }
                 var itemSum = db.Database.SqlQuery<int>(@"select BasketItem.[Count]

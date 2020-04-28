@@ -16,19 +16,14 @@ export class UserService {
             .pipe(map(response => <CreatedUser>response));
     }
 
-    loginGET(): Observable<UserLogin> {
-        return this.httpClient.get('http://localhost:50000/api/login')
-            .pipe(map(response => <UserLogin>response));
-    }
-
-    loginPOST(user: UserLogin): Observable<any> {
-        return this.httpClient.post('http://localhost:50000/api/login', user)
-            .pipe(map(response => <any>response));
-    }
-
     userAuthentication(email: string, password: string): Observable<any> {
         var data = "username=" + email + "&password=" + password + "&grant_type=password";
         var reqHeader = new HttpHeaders({ "Content-Type": "application/x-www-urlencoded", "No-Auth": "True" });
         return this.httpClient.post("http://localhost:50000" + "/token", data, { headers: reqHeader });
+    }
+
+    getCurrentUser(): Observable<any> {
+        return this.httpClient.get("http://localhost:50000" + "api/users/currentUser",
+            { headers: new HttpHeaders({ "Authorization": "Bearer" + localStorage.getItem("userToken") }) });
     }
 }

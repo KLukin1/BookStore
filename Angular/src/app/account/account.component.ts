@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AccountValidators } from '../services/account.validators';
 import { UserService } from '../services/user-service';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NotifierService } from 'angular-notifier';
 
 
 @Component({
@@ -12,8 +15,9 @@ import { UserService } from '../services/user-service';
 export class AccountComponent implements OnInit {
 
     signInForm;
+    isLoginError: boolean = false;
 
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private router: Router, private notifier: NotifierService) { }
 
     ngOnInit() {
         this.signInForm = new FormGroup({
@@ -26,9 +30,6 @@ export class AccountComponent implements OnInit {
                 AccountValidators.cannotContainSpace
             ])
         });
-        this.userService.loginGET().subscribe(
-            result => {
-            });
     }
 
     get getEmail(): FormControl {
@@ -40,8 +41,12 @@ export class AccountComponent implements OnInit {
 
     onSignIn(f) {
         this.userService.userAuthentication(this.getEmail.value, this.getPassword.value).subscribe(
-            result => {
-                console.log(result);
+            data => {
+                localStorage.setItem('userToken', data.access_token);
+                this.router.navigate(['/home']);
+            },
+            (err: HttpErrorResponse) => {
+                this.isLoginError = true;
             })
     }
 }
