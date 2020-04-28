@@ -13,6 +13,7 @@ namespace API.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/basket")]
+    [Authorize]
     public class BasketController : ApiController
     {
         private int loggedInUserId = 1;

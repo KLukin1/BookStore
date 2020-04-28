@@ -31,16 +31,17 @@ export class AccountComponent implements OnInit {
             });
     }
 
-    get getEmail() {
+    get getEmail(): FormControl {
         return this.signInForm.get('Email');
     }
-    get getPassword() {
+    get getPassword(): FormControl {
         return this.signInForm.get('Password');
     }
 
     onSignIn(f) {
-        this.userService.loginPOST(f.value).subscribe(
+        this.userService.userAuthentication(this.getEmail.value, this.getPassword.value).subscribe(
             result => {
+                console.log(result);
             })
     }
 }

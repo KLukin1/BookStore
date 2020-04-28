@@ -1,9 +1,11 @@
-﻿using DataBase;
+﻿using API.Models;
+using DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web.Http;
@@ -62,6 +64,23 @@ namespace API.Controllers
                 return user;
             }
         }
+
+        [HttpGet]
+        [Route("currentUser")]
+        public CurrentUser GetUserClaims()
+        {
+            var identityClaims = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identityClaims.Claims;
+            CurrentUser loginModel = new CurrentUser()
+            {
+                Email = identityClaims.FindFirst("Email").Value,
+                FirstName = identityClaims.FindFirst("FirstName").Value,
+                LastName = identityClaims.FindFirst("LastName").Value,
+                UserId = int.Parse(identityClaims.FindFirst("UserId").Value)
+            };
+            return loginModel;
+        }
+
 
         static string GetMd5Hash(MD5 md5hash, string input)
         {
