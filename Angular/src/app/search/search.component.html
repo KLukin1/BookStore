@@ -2,8 +2,10 @@
 <div class="search-div">
   <input placeholder=" Search by title..." type="text" (keyup)="search(input)" #input />
   <button type="button" class="btn btn-sm"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</button>
-  <div class="search-results" *ngFor="let book of searchedBooks">
-    <img src="http://localhost:50000/{{book.Image}}" class="book-image" />
-    <span>{{book.Title}}</span>
+  <div class="search-wrapper">
+    <div class="search-results" *ngFor="let book of searchedBooks">
+      <img src="http://localhost:50000/{{book.Image}}" class="book-image" />
+      <span>{{book.Title}}</span>
+    </div>
   </div>
 </div>

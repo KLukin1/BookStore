@@ -1,14 +1,20 @@
 
 .search-div {
   width: 400px;
+  position: relative;
 
-  .search-results {
-    background-color: #fff;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #999;
+  .search-wrapper {
+    position: absolute;
+    z-index: 2;
 
-    .book-image{
-      height: 100px;
+    .search-results {
+      background-color: #fff;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #999;
+
+      .book-image {
+        height: 100px;
+      }
     }
   }
 }
