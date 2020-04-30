@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { map, catchError, retry } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { CreatedUser, UserLogin } from '../models/created-user-model';
+import { Observable, Subject } from 'rxjs';
+import { CreatedUser } from '../models/created-user-model';
 
 @Injectable({
     providedIn: 'root'
@@ -22,8 +22,23 @@ export class UserService {
         return this.httpClient.post("http://localhost:50000" + "/token", data, { headers: reqHeader });
     }
 
-    getCurrentUser(): Observable<any> {
-        return this.httpClient.get("http://localhost:50000" + "api/users/currentUser",
-            { headers: new HttpHeaders({ "Authorization": "Bearer" + localStorage.getItem("userToken") }) });
+    setCurrentUser(): Observable<any> {
+        return this.httpClient.get("http://localhost:50000" + "/api/users/currentUser");
+    }
+
+    static getCurrentUser(): any {
+        var currentUser = localStorage.getItem('currentUser');
+        return JSON.parse(currentUser);
+    }
+
+
+    private loginState = new Subject<any>();
+
+    sendIsLoggedIn(isUserLoggedIn) {
+        this.loginState.next(isUserLoggedIn);
+    }
+
+    getIsLoggedIn(): Observable<any> {
+        return this.loginState.asObservable();
     }
 }

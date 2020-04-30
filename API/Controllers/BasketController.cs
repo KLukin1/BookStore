@@ -80,20 +80,6 @@ namespace API.Controllers
             return Ok(GetBooksFromBasket(loginModel.UserId));
         }
 
-        private CurrentUser GetCurrentUser()
-        {
-            var identityClaims = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identityClaims.Claims;
-            CurrentUser loginModel = new CurrentUser()
-            {
-                Email = identityClaims.FindFirst("Email").Value,
-                FirstName = identityClaims.FindFirst("FirstName").Value,
-                LastName = identityClaims.FindFirst("LastName").Value,
-                UserId = int.Parse(identityClaims.FindFirst("UserId").Value)
-            };
-            return loginModel;
-        }
-
         public List<BasketGetApiModel> GetBooksFromBasket(int userId)
         {
             using (var db = new BookStoreContext())
@@ -179,6 +165,20 @@ namespace API.Controllers
                                 on Basket.UserId = [User].Id " + where, parameters.ToArray());
                 return itemSum.Sum();
             }
+        }
+
+        private CurrentUser GetCurrentUser()
+        {
+            var identityClaims = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identityClaims.Claims;
+            CurrentUser loginModel = new CurrentUser()
+            {
+                Email = identityClaims.FindFirst("Email").Value,
+                FirstName = identityClaims.FindFirst("FirstName").Value,
+                LastName = identityClaims.FindFirst("LastName").Value,
+                UserId = int.Parse(identityClaims.FindFirst("UserId").Value)
+            };
+            return loginModel;
         }
     }
 }

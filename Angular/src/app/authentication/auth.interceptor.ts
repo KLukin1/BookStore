@@ -14,7 +14,6 @@ export class AuthInterceptor implements HttpInterceptor {
             return next.handle(req.clone());
 
         if (localStorage.getItem('userToken') != null) {
-            console.log("imam token");
             const clonedreq = req.clone({
                 headers: req.headers.set("Authorization", "Bearer " + localStorage.getItem('userToken'))
             });
@@ -28,7 +27,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 //));
         }
         else {
-            console.log("nemam token");
             return next.handle(req.clone());
         }
     }

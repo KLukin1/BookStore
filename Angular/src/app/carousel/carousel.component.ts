@@ -3,6 +3,7 @@ import { Book } from '../models/book-model';
 import { BookService } from '../services/book-service';
 import { BasketService } from '../services/basket-service';
 import { NotifierService } from 'angular-notifier';
+import { UserService } from '../services/user-service';
 
 @Component({
     selector: 'carousel',
@@ -42,12 +43,16 @@ export class CarouselComponent {
     }
 
     addToBasket(id: number, count: number) {
-        this.basketService.addBookToDB(id, count).subscribe(
-            result => {
-                this.notifier.notify('success', 'Book was added to your basket');
-                this.sendBasketNum();
-            }
-        )
+        if (UserService.getCurrentUser()) {
+            this.basketService.addBookToDB(id, count).subscribe(
+                result => {
+                    this.notifier.notify('success', 'Book was added to your basket');
+                    this.sendBasketNum();
+                }
+            )
+        } else {
+            this.notifier.notify("info", "Please Sign In to add Books to your Basket");
+        }
     }
 
     sendBasketNum() {

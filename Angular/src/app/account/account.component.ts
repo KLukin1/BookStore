@@ -5,6 +5,7 @@ import { UserService } from '../services/user-service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NotifierService } from 'angular-notifier';
+import { BasketService } from '../services/basket-service';
 
 
 @Component({
@@ -16,8 +17,13 @@ export class AccountComponent implements OnInit {
 
     signInForm;
     isLoginError: boolean = false;
+    currentUser;
+    isUserLogged: boolean = false;
 
-    constructor(private userService: UserService, private router: Router, private notifier: NotifierService) { }
+    constructor(private userService: UserService, private router: Router, private notifier: NotifierService,
+        private basketService: BasketService) {
+        this.getIsLoggedIn();
+    }
 
     ngOnInit() {
         this.signInForm = new FormGroup({
@@ -30,6 +36,10 @@ export class AccountComponent implements OnInit {
                 AccountValidators.cannotContainSpace
             ])
         });
+        if (UserService.getCurrentUser()) {
+            this.currentUser = UserService.getCurrentUser();
+            this.isUserLogged = true;
+        }
     }
 
     get getEmail(): FormControl {
@@ -43,10 +53,40 @@ export class AccountComponent implements OnInit {
         this.userService.userAuthentication(this.getEmail.value, this.getPassword.value).subscribe(
             data => {
                 localStorage.setItem('userToken', data.access_token);
-                this.router.navigate(['/home']);
+                this.setCurrentUser();
             },
             (err: HttpErrorResponse) => {
                 this.isLoginError = true;
+            });
+    }
+
+    getIsLoggedIn() {
+        this.userService.getIsLoggedIn().subscribe(
+            result => {
+                if (result) {
+                    this.isUserLogged = true;
+                } else {
+                    this.isUserLogged = false;
+                }
             })
+    }
+
+    setCurrentUser() {
+        this.userService.setCurrentUser().subscribe(
+            result => {
+                localStorage.setItem('currentUser', JSON.stringify(result));
+                this.userService.sendIsLoggedIn(true);
+                this.isUserLogged = true;
+                this.currentUser = UserService.getCurrentUser();
+                this.basketService.sendBasketNum();
+                this.notifier.notify("info", "Hello " + this.currentUser.FirstName);
+                this.router.navigate(['/home']);
+            })
+    }
+
+    logout() {
+        this.userService.sendIsLoggedIn(false);
+        this.isUserLogged = false;
+        window.location.reload();
     }
 }

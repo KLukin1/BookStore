@@ -17,9 +17,8 @@ import { NotifierModule } from "angular-notifier";
 import { CounterComponent } from './counter/counter.component';
 import { SearchComponent } from './search/search.component';
 import { CarouselComponent } from './carousel/carousel.component';
-import { AuthGuard } from './authentication/authentication.component';
 import { AuthInterceptor } from './authentication/auth.interceptor';
-
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +34,8 @@ import { AuthInterceptor } from './authentication/auth.interceptor';
         CreateAccountComponent,
         CounterComponent,
         SearchComponent,
-        CarouselComponent
+        CarouselComponent,
+        LogoutComponent
     ],
     imports: [
         BrowserModule,
@@ -54,7 +54,7 @@ import { AuthInterceptor } from './authentication/auth.interceptor';
             }
         })
     ],
-    providers: [AuthGuard, {
+    providers: [{
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,
         multi: true

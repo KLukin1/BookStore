@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from '../services/basket-service';
-import { Router } from '@angular/router';
-import { NotifierService } from 'angular-notifier';
-import { UserService } from '../services/user-service';
 
 
 @Component({
@@ -12,17 +9,13 @@ import { UserService } from '../services/user-service';
 })
 export class MenuComponent implements OnInit {
 
-    basketNum: number;
+    basketNum: number = 0;
     isHamburgerClicked: boolean = false;
 
-    constructor(private basketService: BasketService, private router: Router,
-        private notifier: NotifierService, private userService: UserService) { this.getBasketCount(); }
+    constructor(private basketService: BasketService) { this.getBasketCount(); }
 
     ngOnInit() {
         this.getBasketCountApi();
-        this.userService.getCurrentUser().subscribe(
-            data => {
-            })
     }
 
     getBasketCountApi() {
@@ -41,12 +34,6 @@ export class MenuComponent implements OnInit {
 
     showSideMenu(bool: boolean) {
         this.isHamburgerClicked = bool;
-    }
-
-    logout() {
-        localStorage.removeItem('userToken');
-        this.router.navigate(['/account']);
-        this.notifier.notify("success", "You have logged out");
     }
 }
 

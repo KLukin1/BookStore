@@ -67,7 +67,7 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("currentUser")]
-        public CurrentUser GetUserClaims()
+        public CurrentUser GetCurrentUser()
         {
             var identityClaims = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identityClaims.Claims;

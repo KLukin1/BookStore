@@ -4,6 +4,7 @@ import { Book } from '../models/book-model';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { BasketService } from '../services/basket-service';
+import { UserService } from '../services/user-service';
 
 @Component({
     selector: 'books',
@@ -99,12 +100,16 @@ export class BooksComponent implements OnInit {
     }
 
     addToBasket(id: number, count: number) {
-        this.basketService.addBookToDB(id, count).subscribe(
-            result => {
-                this.notifier.notify('success', 'Book was added to your basket');
-                this.sendBasketNum();
-            }
-        )
+        if (UserService.getCurrentUser()) {
+            this.basketService.addBookToDB(id, count).subscribe(
+                result => {
+                    this.notifier.notify('success', 'Book was added to your basket');
+                    this.sendBasketNum();
+                }
+            )
+        } else {
+            this.notifier.notify("info", "Please Sign In to add Books to your Basket");
+        }
     }
 
 }

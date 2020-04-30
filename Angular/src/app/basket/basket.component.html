@@ -1,5 +1,10 @@
 
-<div>
+<div *ngIf="!isUserLogged" class="no-logged-user">
+  <h3>Basket is empty.</h3>
+  <span><a routerLink="/account">Sign In</a> or <a routerLink="/create-account">Create an Account</a> to add Books to your Basket.</span>
+</div>
+
+<div *ngIf="isUserLogged">
   <h2>Basket</h2>
   <div class="basket-item" *ngFor="let book of books">
     <div class="row">
@@ -24,14 +29,14 @@
       </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col"></div>
-  <div class="col"></div>
-  <div class="col totals">
-    <span class="totals-title">Subtotal</span>
-    <span class="totals-price">{{totalPrice | currency:'EUR'}}</span>
-    <button type="button" class="btn btn-primary">Proceed to checkout</button>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col totals">
+      <span class="totals-title">Subtotal</span>
+      <span class="totals-price">{{totalPrice | currency:'EUR'}}</span>
+      <button type="button" class="btn btn-primary">Proceed to checkout</button>
+    </div>
   </div>
 </div>

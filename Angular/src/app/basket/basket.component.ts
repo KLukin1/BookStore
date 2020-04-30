@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from '../services/book-service';
 import { BasketService } from '../services/basket-service';
 import { BasketItem } from '../models/basket-model';
 import { NotifierService } from 'angular-notifier';
+import { UserService } from '../services/user-service';
 
 @Component({
     selector: 'basket',
@@ -15,11 +15,13 @@ export class BasketComponent implements OnInit {
     prices: number[];
     totalPrice: number;
     basketNum: number;
+    isUserLogged: boolean = false;
 
-    constructor(private bookService: BookService, private basketService: BasketService,
-        private notifier: NotifierService) { }
+    constructor(private basketService: BasketService, private notifier: NotifierService) { }
 
     ngOnInit() {
+        this.getIsUserLogged();
+
         this.getBasket();
     }
 
@@ -72,5 +74,14 @@ export class BasketComponent implements OnInit {
                 this.notifier.notify("info", "Basket is updated");
                 this.basketService.sendBasketNum();
             })
+    }
+
+    getIsUserLogged() {
+        if (UserService.getCurrentUser()) {
+            console.log(UserService.getCurrentUser())
+            this.isUserLogged = true;
+        } else {
+            this.isUserLogged = false;
+        }
     }
 }

@@ -2,7 +2,8 @@
 <div class="top-menu">
   <div class="top-menu-text">
     <a href="" class="phone-num"><i class="fa fa-phone"></i>&nbsp;&nbsp;+383 36578354</a>
-    <a routerLink="/account" class="login">LogIn / SignUp</a>
+    <a *ngIf="!isUserLogged" routerLink="/account" class="login">LogIn / SignUp</a>
+    <div *ngIf="isUserLogged" class="login"><logout (click)="logout()"></logout></div>
   </div>
 </div>
 
