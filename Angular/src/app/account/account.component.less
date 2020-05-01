@@ -1,9 +1,14 @@
 
-.user-logged{
+.user-logged {
   padding: 20px;
-  span{
+
+  span {
     display: block;
     margin-bottom: 10px;
+  }
+
+  logout {
+    display: none;
   }
 }
 
@@ -29,7 +34,7 @@
     display: block;
     margin-top: 10px;
 
-    &:hover{
+    &:hover {
       color: #999;
     }
   }
@@ -55,7 +60,18 @@
     color: #444;
   }
 
-  button{
+  button {
     margin-left: 0;
+  }
+}
+
+//xsmall
+@media screen and (max-width: 576px) {
+
+  .user-logged {
+
+    logout {
+      display: block;
+    }
   }
 }

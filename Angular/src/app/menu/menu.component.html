@@ -3,7 +3,7 @@
   <a routerLink="home">
     <img class="main-logo" src="http://localhost:50000/images/logo-purple.png" />
   </a>
-  <search class="search"></search>
+  <search class="search-big-screens"></search>
 </div>
 <br />
 
@@ -12,7 +12,6 @@
     <div class="sidemenu-body">
       <a (click)="showSideMenu(false)" class="navbar-brand"><i class="fa fa-times"></i></a>
       <sidebar (closeHambi)="showSideMenu($event)"></sidebar>
-      <search></search>
     </div>
   </div>
   <a (click)="showSideMenu(true)" class="navbar-brand navbar-hamburger"><i class="fa fa-bars"></i></a>

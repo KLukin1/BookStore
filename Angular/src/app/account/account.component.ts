@@ -33,12 +33,16 @@ export class AccountComponent implements OnInit {
             ]),
             Password: new FormControl('', [
                 Validators.required,
+                Validators.minLength(4),
+                Validators.maxLength(8),
                 AccountValidators.cannotContainSpace
             ])
         });
         if (UserService.getCurrentUser()) {
             this.currentUser = UserService.getCurrentUser();
             this.isUserLogged = true;
+        } else {
+            this.isUserLogged = false;
         }
     }
 
@@ -88,5 +92,9 @@ export class AccountComponent implements OnInit {
         this.userService.sendIsLoggedIn(false);
         this.isUserLogged = false;
         window.location.reload();
+    }
+
+    show() {
+        console.log(this.getPassword);
     }
 }

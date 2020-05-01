@@ -19,6 +19,7 @@ import { SearchComponent } from './search/search.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { AuthInterceptor } from './authentication/auth.interceptor';
 import { LogoutComponent } from './logout/logout.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { LogoutComponent } from './logout/logout.component';
         CounterComponent,
         SearchComponent,
         CarouselComponent,
-        LogoutComponent
+        LogoutComponent,
+        SearchPageComponent
     ],
     imports: [
         BrowserModule,

@@ -38,8 +38,8 @@ export class CreateAccountComponent implements OnInit {
     onRegister(f: FormGroupDirective) {
         this.userService.createUser(f.value).subscribe(
             result => {
-                this.notifier.notify("success", "Hello " + f.value.FirstName);
-                this.router.navigateByUrl('/home');
+                this.notifier.notify("info", "Wellcome " + f.value.FirstName + "! Please Sign In with your Email");
+                this.router.navigateByUrl('/account');
             })
     }
 

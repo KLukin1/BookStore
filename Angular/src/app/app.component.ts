@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
 
     isUserLogged: boolean = false;
 
-    constructor(private router: Router, private userService: UserService) { this.getIsLoggedIn(); }
+    constructor(private router: Router, private userService: UserService) { }
 
     ngOnInit() {
         this.router.events.subscribe(evt => {
@@ -20,11 +20,13 @@ export class AppComponent implements OnInit {
             }
             window.scrollTo(0, 0);
         });
+        this.getIsLoggedIn();
     }
 
     getIsLoggedIn() {
         this.userService.getIsLoggedIn().subscribe(
             result => {
+                //if (UserService.getCurrentUser())
                 if (result) {
                     this.isUserLogged = true;
                 } else {

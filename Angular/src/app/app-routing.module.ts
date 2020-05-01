@@ -7,6 +7,7 @@ import { BooksComponent } from './books/books.component';
 import { OneBookComponent } from './one-book/one-book.component';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
     { path: 'basket', component: BasketComponent },
     { path: 'books/:id', component: OneBookComponent },
     { path: 'forgot-password', component: ForgotPassComponent },
-    { path: 'create-account', component: CreateAccountComponent }
+    { path: 'create-account', component: CreateAccountComponent },
+    { path: 'search-page', component: SearchPageComponent }
 ];
 
 @NgModule({
