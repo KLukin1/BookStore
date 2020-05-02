@@ -28,7 +28,7 @@
       </div>
       <div>
         <label>Password:</label><br />
-        <input type="password" formControlName="Password" (click)="show()" />
+        <input type="password" formControlName="Password" />
         <div *ngIf="getPassword.invalid && getPassword.touched" class="alert alert-danger">
           <div *ngIf="getPassword.errors.required">Required field</div>
           <div *ngIf="getPassword.errors.minlength">Password must have at least {{getPassword.errors.minlength.requiredLength}} characters</div>

@@ -35,6 +35,8 @@
       <input type="password" formControlName="Password" required />
       <div *ngIf="getPassword.invalid && getPassword.touched" class="alert alert-danger">
         <div *ngIf="getPassword.errors.required">Required field</div>
+        <div *ngIf="getPassword.errors.minlength">Password must have at least {{getPassword.errors.minlength.requiredLength}} characters</div>
+        <div *ngIf="getPassword.errors.maxlength">Password can't have more than {{getPassword.errors.maxlength.requiredLength}} characters</div>
         <div *ngIf="getPassword.errors.cannotContainSpace">Password cannot contain space</div>
       </div>
     </div>

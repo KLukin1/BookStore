@@ -93,8 +93,4 @@ export class AccountComponent implements OnInit {
         this.isUserLogged = false;
         window.location.reload();
     }
-
-    show() {
-        console.log(this.getPassword);
-    }
 }

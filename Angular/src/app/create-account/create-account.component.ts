@@ -29,6 +29,8 @@ export class CreateAccountComponent implements OnInit {
             ]),
             Password: new FormControl('', [
                 Validators.required,
+                Validators.minLength(4),
+                Validators.maxLength(8),
                 AccountValidators.cannotContainSpace
             ]),
             ConfirmPassword: new FormControl('', Validators.required)

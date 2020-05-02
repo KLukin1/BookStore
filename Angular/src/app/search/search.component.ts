@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { BookService } from '../services/book-service';
 import { Book } from '../models/book-model';
 import { Router } from '@angular/router';
@@ -14,8 +14,17 @@ export class SearchComponent implements OnInit {
     inputValue: string = "";
     searchedBooks: Book[] = [];
     show5Books: Book[] = [];
-    isSearchShown: boolean = false;
-    myModel;
+    isSearcResultShown: boolean = false;
+
+    @HostListener("click")
+    focusIn() {
+        this.isSearcResultShown = true;
+    }
+
+    @HostListener("document:click")
+    focusOut() {
+        this.isSearcResultShown = false;
+    }
 
     constructor(private bookService: BookService, private router: Router) { }
 
@@ -51,8 +60,8 @@ export class SearchComponent implements OnInit {
                     this.searchedBooks.push(this.books[i]);
                 }
             }
-            this.isSearchShown = true;
             this.show5();
+            this.isSearcResultShown = true;
         }
     }
 
@@ -66,11 +75,7 @@ export class SearchComponent implements OnInit {
     }
 
     searchPage() {
-        this.isSearchShown = false;
+        this.isSearcResultShown = false;
         this.router.navigateByUrl('/search-page');
-    }
-
-    closeSearchResults() {
-        this.isSearchShown = false;
     }
 }
