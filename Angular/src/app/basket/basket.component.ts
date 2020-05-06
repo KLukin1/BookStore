@@ -15,7 +15,8 @@ export class BasketComponent implements OnInit {
     prices: number[];
     totalPrice: number;
     basketNum: number;
-    isUserLogged: boolean = false;
+  isUserLogged: boolean = false;
+  isBasketEmpty: boolean = true;
 
     constructor(private basketService: BasketService, private notifier: NotifierService) { }
 
@@ -31,6 +32,11 @@ export class BasketComponent implements OnInit {
                 this.books = response;
                 this.calculatePrices();
                 this.sendBasketNum();
+            if (this.books.length > 0) {
+              this.isBasketEmpty = false;
+            } else {
+              this.isBasketEmpty = true;
+            }
             })
     }
 
@@ -42,7 +48,12 @@ export class BasketComponent implements OnInit {
         book.Count = 0;
         this.basketService.changeCount(book).subscribe(
             response => {
-                this.books = this.books.filter(x => x.BasketItemId != book.BasketItemId);
+            this.books = this.books.filter(x => x.BasketItemId != book.BasketItemId);
+            if (this.books.length > 0) {
+              this.isBasketEmpty = false;
+            } else {
+              this.isBasketEmpty = true;
+            }
                 this.calculatePrices();
                 this.sendBasketNum();
                 this.notifier.notify("success", "Book was removed from the basket");
@@ -71,7 +82,6 @@ export class BasketComponent implements OnInit {
         this.calculatePrices();
         this.basketService.changeCount(book).subscribe(
             result => {
-                this.notifier.notify("info", "Basket is updated");
                 this.basketService.sendBasketNum();
             })
     }

@@ -9,8 +9,6 @@ import { UserService } from './services/user-service';
 })
 export class AppComponent implements OnInit {
 
-    isUserLogged: boolean = false;
-
     constructor(private router: Router, private userService: UserService) { }
 
     ngOnInit() {
@@ -20,24 +18,5 @@ export class AppComponent implements OnInit {
             }
             window.scrollTo(0, 0);
         });
-        this.getIsLoggedIn();
-    }
-
-    getIsLoggedIn() {
-        this.userService.getIsLoggedIn().subscribe(
-            result => {
-                //if (UserService.getCurrentUser())
-                if (result) {
-                    this.isUserLogged = true;
-                } else {
-                    this.isUserLogged = false;
-                }
-            })
-    }
-
-    logout() {
-        this.isUserLogged = false;
-        this.userService.sendIsLoggedIn(false);
-        window.location.reload();
     }
 }

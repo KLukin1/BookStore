@@ -5,41 +5,43 @@ import { Observable, Subject } from 'rxjs';
 import { CreatedUser } from '../models/created-user-model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class UserService {
 
-    constructor(private httpClient: HttpClient) { }
+  site = 'https://klaras-book-store.azurewebsites.net/';
 
-    createUser(user: CreatedUser): Observable<CreatedUser> {
-        return this.httpClient.post('http://localhost:50000/api/users/', user)
-            .pipe(map(response => <CreatedUser>response));
-    }
+  constructor(private httpClient: HttpClient) { }
 
-    userAuthentication(email: string, password: string): Observable<any> {
-        var data = "username=" + email + "&password=" + password + "&grant_type=password";
-        var reqHeader = new HttpHeaders({ "Content-Type": "application/x-www-urlencoded", "No-Auth": "True" });
-        return this.httpClient.post("http://localhost:50000" + "/token", data, { headers: reqHeader });
-    }
+  createUser(user: CreatedUser): Observable<CreatedUser> {
+    return this.httpClient.post(this.site + 'api/users/', user)
+      .pipe(map(response => <CreatedUser>response));
+  }
 
-    setCurrentUser(): Observable<any> {
-        return this.httpClient.get("http://localhost:50000" + "/api/users/currentUser");
-    }
+  userAuthentication(email: string, password: string): Observable<any> {
+    var data = "username=" + email + "&password=" + password + "&grant_type=password";
+    var reqHeader = new HttpHeaders({ "Content-Type": "application/x-www-urlencoded", "No-Auth": "True" });
+    return this.httpClient.post(this.site + "token", data, { headers: reqHeader });
+  }
 
-    static getCurrentUser(): any {
-        var currentUser = localStorage.getItem('currentUser');
-        return JSON.parse(currentUser);
-    }
+  setCurrentUser(): Observable<any> {
+    return this.httpClient.get(this.site + "api/users/currentUser");
+  }
+
+  static getCurrentUser(): any {
+    var currentUser = localStorage.getItem('currentUser');
+    return JSON.parse(currentUser);
+  }
 
 
-    private loginState = new Subject<any>();
+  private loginState = new Subject<any>();
 
-    sendIsLoggedIn(isUserLoggedIn) {
-        this.loginState.next(isUserLoggedIn);
-    }
+  sendIsLoggedIn(isUserLoggedIn) {
+    this.loginState.next(isUserLoggedIn);
+  }
 
-    getIsLoggedIn(): Observable<any> {
-        return this.loginState.asObservable();
-    }
+  getIsLoggedIn(): Observable<any> {
+    return this.loginState.asObservable();
+  }
 
 }

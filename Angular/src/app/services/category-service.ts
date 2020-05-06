@@ -6,15 +6,17 @@ import { Category } from '../models/category-model';
 
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class CategoryService {
 
-    constructor(private httpClient: HttpClient) { }
+  site = 'https://klaras-book-store.azurewebsites.net/';
 
-    getCategories(): Observable<Category[]> {
-        return this.httpClient.get('http://localhost:50000/api/category')
-            .pipe(map(response => <Category[]>response));
-    }
+  constructor(private httpClient: HttpClient) { }
+
+  getCategories(): Observable<Category[]> {
+    return this.httpClient.get(this.site + 'api/category')
+      .pipe(map(response => <Category[]>response));
+  }
 
 }

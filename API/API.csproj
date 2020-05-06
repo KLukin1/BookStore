@@ -222,6 +222,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\A-deepness-in-the-sky.jpg" />
+    <Content Include="images\bookstore-location.jpg" />
     <Content Include="images\boy.jpg" />
     <Content Include="images\Dark-frontiers.jpg" />
     <Content Include="images\dorian-gray.jpg" />
@@ -232,6 +233,7 @@
     <Content Include="images\GoT-3.jpg" />
     <Content Include="images\GoT-4.jpg" />
     <Content Include="images\GoT-5.jpg" />
+    <Content Include="images\guest-list.jpg" />
     <Content Include="images\happy-prince.jpg" />
     <Content Include="images\Hitchhikers-guide.jpg" />
     <Content Include="images\HP-and-chamber-of-secrets.jpg" />
@@ -242,9 +244,12 @@
     <Content Include="images\HP-and-the-deathly-hallows.jpg" />
     <Content Include="images\HP-and-the-order-of-the-phoenix.jpg" />
     <Content Include="images\huckleberry-finn.jpg" />
+    <Content Include="images\hunting-party.jpg" />
     <Content Include="images\ideal-husband.jpg" />
     <Content Include="images\If-it-bleeds.jpg" />
     <Content Include="images\Infinite-stars.jpg" />
+    <Content Include="images\institute-king.jpg" />
+    <Content Include="images\it-king.jpg" />
     <Content Include="images\logo-purple.png" />
     <Content Include="images\mark-twain-collection.jpg" />
     <Content Include="images\matilda.jpg" />
@@ -253,6 +258,7 @@
     <Content Include="images\pride-and-prejudice.jpg" />
     <Content Include="images\Restaurant-at-the-end-of-the-universe.jpg" />
     <Content Include="images\sense-and-sensibility.jpg" />
+    <Content Include="images\shining-king.jpg" />
     <Content Include="images\short-stories-wilde.jpg" />
     <Content Include="images\tom-sawyer.jpg" />
     <Content Include="images\twits.jpg" />
@@ -278,6 +284,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <None Include="Properties\PublishProfiles\klaras-book-store - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
