@@ -81,7 +81,8 @@ export class BasketComponent implements OnInit {
         book.Count = c;
         this.calculatePrices();
         this.basketService.changeCount(book).subscribe(
-            result => {
+          result => {
+            this.notifier.notify("info", "Basket is updated");
                 this.basketService.sendBasketNum();
             })
     }

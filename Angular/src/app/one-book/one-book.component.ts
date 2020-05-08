@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BookService } from '../services/book-service';
 import { Book } from '../models/book-model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { BasketService } from '../services/basket-service';
 import { NotifierService } from 'angular-notifier';
 import { UserService } from '../services/user-service';
@@ -17,16 +17,19 @@ export class OneBookComponent implements OnInit {
     bookId: number;
     count: number = 1;
 
-    constructor(private bookService: BookService, private route: ActivatedRoute,
+    constructor(private bookService: BookService, private activatedRoute: ActivatedRoute,
         private basketService: BasketService, private notifier: NotifierService) { }
 
     ngOnInit() {
-        this.bookId = +this.route.snapshot.paramMap.get('id');
+      this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+        this.bookId = +params.get('id');
+        this.getBookById(this.bookId);
+      })
         this.getBookById(this.bookId);
     }
 
     getBookById(id: number) {
-        this.bookService.getBookById(this.bookId).subscribe(
+        this.bookService.getBookById(id).subscribe(
             result => {
                 this.book = result;
             }

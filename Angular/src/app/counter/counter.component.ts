@@ -16,14 +16,13 @@ export class CounterComponent {
     changeCount(c: boolean) {
         if (c == true) {
           this.counter += 1;
-          this.notifier.notify("info", "Basket is updated");
+          this.change.emit(this.counter);
         } else if (c == false && this.counter == 1) {
           this.counter = 1;
           this.notifier.notify("warning", "Number of books cannot be less than 1");
         } else {
           this.counter -= 1;
-          this.notifier.notify("info", "Basket is updated");
+          this.change.emit(this.counter);
         }
-        this.change.emit(this.counter);
     }
 }
