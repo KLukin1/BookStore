@@ -9,7 +9,8 @@ import { BasketItem } from '../models/basket-model';
 })
 export class BasketService {
 
-  site = 'https://klaras-book-store.azurewebsites.net/';
+  //site = 'https://klaras-book-store.azurewebsites.net/';
+  site = 'http://localhost:50000/';
 
   constructor(private httpClient: HttpClient) { }
 

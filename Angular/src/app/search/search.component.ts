@@ -10,8 +10,6 @@ import { Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
-  books: Book[] = [];
-  inputValue: string = "";
   searchedBooks: Book[] = [];
   show5Books: Book[] = [];
   isSearcResultShown: boolean = false;
@@ -29,40 +27,15 @@ export class SearchComponent implements OnInit {
   constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit() {
-    this.getAllTitles();
-  }
-
-  getAllTitles() {
-    this.bookService.getBooks("", "").subscribe(
-      result => {
-        this.books = result;
-      })
   }
 
   search(input) {
-    this.inputValue = input.value;
-    if (!this.inputValue) {
-      this.searchedBooks = [];
-    } else {
-      this.searchedBooks = [];
-
-      var oneInput = this.inputValue.toLowerCase().split(" ");
-      for (let i = 0; i < this.books.length; i++) {
-        var oneBook = this.books[i].Title.toLowerCase();
-        var counter = 0;
-
-        for (let j = 0; j < oneInput.length; j++) {
-          if (oneBook.includes(oneInput[j])) {
-            counter += 1;
-          }
-        }
-        if (counter == oneInput.length) {
-          this.searchedBooks.push(this.books[i]);
-        }
-      }
-      this.show5();
-      this.isSearcResultShown = true;
-    }
+    this.bookService.getBooks("","",input.value).subscribe(
+      result => {
+        this.searchedBooks = result;
+        this.show5();
+        this.isSearcResultShown = true;
+      })
   }
 
   show5() {
@@ -72,10 +45,5 @@ export class SearchComponent implements OnInit {
         this.show5Books.push(this.searchedBooks[i]);
       }
     }
-  }
-
-  searchPage() {
-    this.isSearcResultShown = false;
-    this.router.navigateByUrl('/search-page');
   }
 }

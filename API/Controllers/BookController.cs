@@ -2,12 +2,14 @@
 using DataBase;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Mvc.Html;
 
 namespace API.Controllers
 {
@@ -17,16 +19,17 @@ namespace API.Controllers
     {
         [HttpGet]
         [Route("")]
-        public IHttpActionResult GetBooks(string categoryName = null, string author = null)
+        public IHttpActionResult GetBooks(string categoryName = null, string author = null, string input = null)
         {
-            return Ok(Get(categoryName, author));
+            return Ok(Get(categoryName, author, input));
         }
 
-        public List<BookGetApiModel> Get(string categoryName, string author)
+        public List<BookGetApiModel> Get(string categoryName, string author, string input)
         {
             using (var db = new BookStoreContext())
             {
                 string where = "";
+                string like = "";
 
                 var parameters = new List<SqlParameter> { };
 
@@ -50,6 +53,14 @@ namespace API.Controllers
                     }
                 }
 
+                if (!string.IsNullOrEmpty(input))
+                {
+                    where = $"where Book.Title ";
+                    like = $"like @input";
+                    input = "%" + input.Trim() + "%";
+                    parameters.Add(new SqlParameter("@input", input));
+                }
+
                 var list = db.Database.SqlQuery<BookGetApiModel>(@"select Book.Id as BookId, Book.Title, 
                                             Category.CategoryName, Book.Image, Book.IsReccomended,
                                             Author.FirstName as AuthorFirstName, Author.LastName as AuthorLastName,
@@ -58,7 +69,7 @@ namespace API.Controllers
                                             inner join Author
                                             on Book.AuthorId = Author.Id
                                             inner join Category
-                                            on Book.CategoryId = Category.Id " + where, parameters.ToArray()).ToList();
+                                            on Book.CategoryId = Category.Id " + where + like, parameters.ToArray()).ToList();
 
                 return list;
             }

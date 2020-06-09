@@ -1,7 +1,6 @@
 
 <div class="search-div">
-  <input (keyup.enter)="searchPage()" (keyup)="search(input)" #input placeholder=" Search by title..." type="text" />
-  <button (click)="searchPage()" type="button" class="btn btn-sm"><i class="fa fa-search"></i>&nbsp;&nbsp;Search</button>
+  <input (keyup)="search(input)" #input placeholder=" Search by title..." type="text" />
   <div class="search-wrapper" *ngIf="isSearcResultShown">
     <div class="search-results" *ngFor="let book of show5Books">
       <div class="row">

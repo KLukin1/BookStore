@@ -40,7 +40,7 @@ export class BooksComponent implements OnInit {
     }
 
     getBooks(categoryName: string, author: string) {
-        this.bookService.getBooks(categoryName, author).subscribe(
+        this.bookService.getBooks(categoryName, author,"").subscribe(
             result => {
                 this.books = result;
             }

@@ -11,11 +11,12 @@ import { map, catchError } from 'rxjs/operators';
 export class BookService {
 
   bookId: number;
-  site = 'https://klaras-book-store.azurewebsites.net/';
+  //site = 'https://klaras-book-store.azurewebsites.net/';
+  site = 'http://localhost:50000/';
 
   constructor(private httpClient: HttpClient) { }
 
-  getBooks(categoryName: string, author: string): Observable<Book[]> {
+  getBooks(categoryName: string, author: string, input: string): Observable<Book[]> {
     let url: string = this.site + 'api/books/';
     if (categoryName) {
       url += "?categoryName=" + categoryName;
@@ -26,6 +27,9 @@ export class BookService {
       if (author) {
         url += "?author=" + author;
       }
+    }
+    if (input) {
+      url += "?input=" + input;
     }
     return this.httpClient.get(url)
       .pipe(map(response => <Book[]>response));
@@ -40,5 +44,4 @@ export class BookService {
     return this.httpClient.get(this.site + 'api/books/reccomended')
       .pipe(map(response => <Book[]>response))
   }
-
 }
