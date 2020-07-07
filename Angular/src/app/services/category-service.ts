@@ -10,8 +10,7 @@ import { Category } from '../models/category-model';
 })
 export class CategoryService {
 
-  //site = 'https://klaras-book-store.azurewebsites.net/';
-  site = 'http://localhost:50000/';
+  site = 'https://klaras-book-store.azurewebsites.net/';
 
   constructor(private httpClient: HttpClient) { }
 

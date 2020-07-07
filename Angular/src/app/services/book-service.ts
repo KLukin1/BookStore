@@ -11,8 +11,7 @@ import { map, catchError } from 'rxjs/operators';
 export class BookService {
 
   bookId: number;
-  //site = 'https://klaras-book-store.azurewebsites.net/';
-  site = 'http://localhost:50000/';
+  site = 'https://klaras-book-store.azurewebsites.net/';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -9,8 +9,7 @@ import { CreatedUser } from '../models/created-user-model';
 })
 export class UserService {
 
-  //site = 'https://klaras-book-store.azurewebsites.net/';
-  site = 'http://localhost:50000/';
+  site = 'https://klaras-book-store.azurewebsites.net/';
 
   constructor(private httpClient: HttpClient) { }
 
