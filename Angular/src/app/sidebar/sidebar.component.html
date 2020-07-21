@@ -1,7 +1,13 @@
 
+
 <div class="sidebar-body">
   <span>Shop by Category</span>
   <br /><br />
+  <div *ngIf="loader" class="loading-dots">
+    <div class="loading-dots--dot"></div>
+    <div class="loading-dots--dot"></div>
+    <div class="loading-dots--dot"></div>
+  </div>
   <div *ngFor="let category of categoryUI" class="categories">
     <a (click)="closeHamburger()"
        [routerLink]="['/books', {categoryName: category.CategoryName}]">
