@@ -23,6 +23,9 @@
   </div>
 
   <div class="row">
+    <div *ngIf="loader">
+      <loader></loader>
+    </div>
     <div class="col-4 col-xs-6 one-book" *ngFor="let book of books">
       <div class="book-wrapper">
         <a [routerLink]="['/books', book.BookId]"><img src="https://klaras-book-store.azurewebsites.net/{{book.Image}}" class="book-img" /></a>

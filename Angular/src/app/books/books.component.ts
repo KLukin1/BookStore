@@ -17,7 +17,8 @@ export class BooksComponent implements OnInit {
     categoryName: string;
     author: string;
     buttonText: string = 'Sort By  <span class="caret"></span>';
-    count1: number = 1;
+  count1: number = 1;
+  loader: boolean = true;
 
     constructor(private bookService: BookService, private basketService: BasketService,
         private route: ActivatedRoute, private router: Router, private notifier: NotifierService) {
@@ -42,7 +43,8 @@ export class BooksComponent implements OnInit {
     getBooks(categoryName: string, author: string) {
         this.bookService.getBooks(categoryName, author,"").subscribe(
             result => {
-                this.books = result;
+            this.books = result;
+            this.loader = false;
             }
         )
     }
