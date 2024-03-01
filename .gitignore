@@ -6,3 +6,5 @@
 /packages
 /.vs
 /Angular/.vs
+/Angular/.angular/cache/17.2.1
+/node_modules
