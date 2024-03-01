@@ -21,9 +21,7 @@ export class AccountComponent implements OnInit {
     isUserLogged: boolean = false;
 
     constructor(private userService: UserService, private router: Router, private notifier: NotifierService,
-        private basketService: BasketService) {
-        this.getIsLoggedIn();
-    }
+        private basketService: BasketService) { }
 
     ngOnInit() {
         this.signInForm = new FormGroup({
@@ -38,12 +36,8 @@ export class AccountComponent implements OnInit {
                 AccountValidators.cannotContainSpace
             ])
         });
-        if (UserService.getCurrentUser()) {
-            this.currentUser = UserService.getCurrentUser();
-            this.isUserLogged = true;
-        } else {
-            this.isUserLogged = false;
-        }
+
+        this.getIsLoggedIn();
     }
 
     get getEmail(): FormControl {
@@ -65,14 +59,12 @@ export class AccountComponent implements OnInit {
     }
 
     getIsLoggedIn() {
-        this.userService.getIsLoggedIn().subscribe(
-            result => {
-                if (result) {
-                    this.isUserLogged = true;
-                } else {
-                    this.isUserLogged = false;
-                }
-            })
+        if (UserService.getCurrentUser()) {
+            this.currentUser = UserService.getCurrentUser();
+            this.isUserLogged = true;
+        } else {
+            this.isUserLogged = false;
+        }
     }
 
     setCurrentUser() {
@@ -84,13 +76,12 @@ export class AccountComponent implements OnInit {
                 this.currentUser = UserService.getCurrentUser();
                 this.basketService.sendBasketNum();
                 this.notifier.notify("info", "Hello " + this.currentUser.FirstName);
-                this.router.navigate(['/home']);
             })
     }
 
     logout() {
-        this.userService.sendIsLoggedIn(false);
-        this.isUserLogged = false;
+        //this.userService.sendIsLoggedIn(false);
+        //this.isUserLogged = false;
         window.location.reload();
     }
 }

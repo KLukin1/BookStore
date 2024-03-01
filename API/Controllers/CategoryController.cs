@@ -1,10 +1,7 @@
 ﻿using API.Models;
 using DataBase;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -23,7 +20,7 @@ namespace API.Controllers
 
         public List<CategoryGetApiModel> Get()
         {
-            using(var db = new BookStoreContext())
+            using (var db = new BookStoreContext())
             {
                 return db.Database.SqlQuery<CategoryGetApiModel>(@"select Category.CategoryName, 
                                             Author.LastName + ', ' + Author.FirstName as AuthorFullName

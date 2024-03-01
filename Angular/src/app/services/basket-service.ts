@@ -3,44 +3,55 @@ import { map, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { BasketItem } from '../models/basket-model';
+import * as myGlobals from '../global-variables';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class BasketService {
 
-  site = 'https://klaras-book-store.azurewebsites.net/';
+    site = myGlobals.siteName + 'api/basket';
 
-  constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient) { }
 
-  addBookToDB(id: number, count: number): Observable<number> {
-    return this.httpClient.post(this.site + 'api/basket', { BookId: id, Count: count })
-      .pipe(map(response => <number>response));
-  }
+    // todo - bug when item is already in basket -> adding book doesn't work on one-book-component or recomendations
+    addBookToDB(id: number, count: number): Observable<number> {
+        return this.httpClient.post(this.site, { BookId: id, Count: count })
+            .pipe(map(response => <number>response));
+    }
 
-  getBasket(): Observable<BasketItem[]> {
-    return this.httpClient.get(this.site + 'api/basket')
-      .pipe(map(response => <BasketItem[]>response));
-  }
+    getBasket(): Observable<BasketItem[]> {
+        return this.httpClient.get(this.site)
+            .pipe(map(response => <BasketItem[]>response));
+    }
 
-  changeCount(book: BasketItem): Observable<BasketItem> {
-    return this.httpClient.put(this.site + 'api/basket/basketItem', book)
-      .pipe(map(response => <BasketItem>response));
-  }
+    changeCount(book: BasketItem): Observable<BasketItem> {
+        return this.httpClient.put(this.site + '/basketItem', book)
+            .pipe(map(response => <BasketItem>response));
+    }
 
+    getBasketCountApi(): Observable<number> {
+        return this.httpClient.get(this.site + '/count')
+            .pipe(map(response => <number>response));
+    }
 
-  getBasketCountApi(): Observable<number> {
-    return this.httpClient.get(this.site + 'api/basket/count')
-      .pipe(map(response => <number>response));
-  }
+    pay(userId: number): Observable<any> {
+        return this.httpClient.put(this.site + '/checkout', userId)
+            .pipe(map(response => <any>response));
+    }
 
-  private subject = new Subject<any>();
+    getHistory(): Observable<BasketItem[][]> {
+        return this.httpClient.get(this.site + '/history')
+            .pipe(map(response => <BasketItem[][]>response));
+    }
 
-  sendBasketNum() {
-    this.subject.next();
-  }
+    private subject = new Subject<any>();
 
-  getBasketNum(): Observable<any> {
-    return this.subject.asObservable();
-  }
+    sendBasketNum() {
+        this.subject.next(null);
+    }
+
+    getBasketNum(): Observable<any> {
+        return this.subject.asObservable();
+    }
 }

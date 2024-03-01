@@ -1,15 +1,10 @@
 ﻿using API.Models;
 using DataBase;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Mvc.Html;
 
 namespace API.Controllers
 {
@@ -98,12 +93,12 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Route("reccomended")]
-        public IHttpActionResult GetReccomended()
+        [Route("recommended")]
+        public IHttpActionResult GetRecommended()
         {
-            return Ok(GetReccom());
+            return Ok(GetRecom());
         }
-        public List<BookGetApiModel> GetReccom()
+        public List<BookGetApiModel> GetRecom()
         {
             using (var db = new BookStoreContext())
             {

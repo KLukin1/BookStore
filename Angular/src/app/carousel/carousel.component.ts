@@ -4,6 +4,7 @@ import { BookService } from '../services/book-service';
 import { BasketService } from '../services/basket-service';
 import { NotifierService } from 'angular-notifier';
 import { UserService } from '../services/user-service';
+import * as myGlobals from '../global-variables';
 
 @Component({
     selector: 'carousel',
@@ -12,21 +13,22 @@ import { UserService } from '../services/user-service';
 })
 export class CarouselComponent {
 
-    reccomendedBooks: Book[] = [];
+    recommendedBooks: Book[] = [];
     slides = [[]];
+    siteName: string = myGlobals.siteName;
 
     constructor(private bookService: BookService, private basketService: BasketService,
         private notifier: NotifierService) { }
 
     ngOnInit() {
-        this.getReccomended();
+        this.getRecommended();
     }
 
-    getReccomended() {
-        this.bookService.getReccomended().subscribe(
+    getRecommended() {
+        this.bookService.getRecommended().subscribe(
             result => {
-                this.reccomendedBooks = result;
-                this.slides = this.makeSlides(this.reccomendedBooks, 3);
+                this.recommendedBooks = result;
+                this.slides = this.makeSlides(this.recommendedBooks, 3);
             })
     }
 
@@ -42,6 +44,7 @@ export class CarouselComponent {
 
     }
 
+    // todo - fix bug: adding doesn't work if book is already in basket
     addToBasket(id: number, count: number) {
         if (UserService.getCurrentUser()) {
             this.basketService.addBookToDB(id, count).subscribe(

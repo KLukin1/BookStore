@@ -20,6 +20,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { AuthInterceptor } from './authentication/auth.interceptor';
 import { LogoutComponent } from './logout/logout.component';
 import { LoaderComponent } from './loader/loader.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
     declarations: [
@@ -36,8 +37,9 @@ import { LoaderComponent } from './loader/loader.component';
         CounterComponent,
         SearchComponent,
         CarouselComponent,
-    LogoutComponent,
-    LoaderComponent
+        LogoutComponent,
+        LoaderComponent,
+        HistoryComponent
     ],
     imports: [
         BrowserModule,

@@ -1,11 +1,9 @@
 ﻿using API.Models;
 using DataBase;
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -51,7 +49,7 @@ namespace API.Controllers
                 {
                     var basket = db.Baskets.FirstOrDefault(x => x.UserId == userId && x.IsPayed != true);
                     var itemExists = db.BasketItems.Any(x => x.BookId == bookModel.BookId && x.BasketId == basket.Id);
-                    
+
                     if (itemExists)
                     {
                         var item = db.BasketItems.FirstOrDefault(x => x.BookId == bookModel.BookId);
@@ -89,7 +87,7 @@ namespace API.Controllers
 
                 if (userId > 0)
                 {
-                    where = $"where Basket.UserId = @loggedInUserId";
+                    where = $"where Basket.UserId = @loggedInUserId and Basket.IsPayed = 0";
                     parameters.Add(new SqlParameter("@loggedInUserId", userId.ToString().Trim()));
 
                 }
@@ -146,14 +144,14 @@ namespace API.Controllers
 
         public int GetBasketItemCount(int userId)
         {
-            using(var db = new BookStoreContext())
+            using (var db = new BookStoreContext())
             {
                 string where = "";
                 var parameters = new List<SqlParameter> { };
 
                 if (userId > 0)
                 {
-                    where = $"where Basket.UserId = @loggedInUserId";
+                    where = $"where Basket.UserId = @loggedInUserId and Basket.IsPayed = 0";
                     parameters.Add(new SqlParameter("@loggedInUserId", userId.ToString().Trim()));
 
                 }
@@ -164,6 +162,76 @@ namespace API.Controllers
                                 inner join [User]
                                 on Basket.UserId = [User].Id " + where, parameters.ToArray());
                 return itemSum.Sum();
+            }
+        }
+
+        [HttpPut]
+        [Route("checkout")]
+        public IHttpActionResult Checkout()
+        {
+            CurrentUser loginModel = GetCurrentUser();
+            return Ok(Pay(loginModel.UserId));
+        }
+
+        public bool Pay(int userId)
+        {
+            using (var db = new BookStoreContext())
+            {
+                string where = "";
+                var parameters = new List<SqlParameter> { };
+
+                if (userId > 0)
+                {
+                    where = $"where u.Id = @loggedInUserId and b.IsPayed = 0";
+                    parameters.Add(new SqlParameter("@loggedInUserId", userId.ToString().Trim()));
+                }
+                var basketUpdate = db.Database.ExecuteSqlCommand(@"update b
+                                                                    set b.IsPayed = 1, b.DatePayed = GETDATE()
+                                                                    from Basket b
+                                                                    inner join [User] u on u.Id = b.UserId " + where, parameters.ToArray());
+            }
+
+            return true;
+        }
+
+        [HttpGet]
+        [Route("history")]
+        public IHttpActionResult GetHistory()
+        {
+            CurrentUser loginModel = GetCurrentUser();
+            return Ok(GetHistoryList(loginModel.UserId));
+        }
+
+        public IEnumerable<IGrouping<int, BasketGetApiModel>> GetHistoryList(int userId)
+        {
+            using (var db = new BookStoreContext())
+            {
+                string where = "";
+                var parameters = new List<SqlParameter> { };
+
+                if (userId > 0)
+                {
+                    where = $"where Basket.UserId = @loggedInUserId and Basket.IsPayed = 1";
+                    parameters.Add(new SqlParameter("@loggedInUserId", userId.ToString().Trim()));
+
+                }
+                var list = db.Database.SqlQuery<BasketGetApiModel>(@"select Basket.Id as BasketId, 
+                                                    BasketItem.Id as BasketItemId, Book.Id as BookId, 
+                                                    Book.Title, Book.Image, Book.Price, Book.Discount,
+                                                    Author.FirstName as AuthorFirstName, 
+                                                    Author.LastName as AuthorLastName,
+                                                    BasketItem.[Count] as [Count]
+                                                    from BasketItem
+                                                    inner join Basket
+                                                    on BasketItem.BasketId = Basket.Id
+                                                    inner join Book
+                                                    on BasketItem.BookId = Book.Id
+                                                    inner join Author
+                                                    on Book.AuthorId = Author.Id " + where, parameters.ToArray()).ToList();
+
+                IEnumerable<IGrouping<int, BasketGetApiModel>> sorted = list.GroupBy(x => x.BasketId, x => x);
+
+                return sorted;
             }
         }
 

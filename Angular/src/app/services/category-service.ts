@@ -3,20 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Category } from '../models/category-model';
+import * as myGlobals from '../global-variables';
 
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CategoryService {
 
-  site = 'https://klaras-book-store.azurewebsites.net/';
+    site = myGlobals.siteName;
 
-  constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient) { }
 
-  getCategories(): Observable<Category[]> {
-    return this.httpClient.get(this.site + 'api/category')
-      .pipe(map(response => <Category[]>response));
-  }
+    getCategories(): Observable<Category[]> {
+        return this.httpClient.get(this.site + 'api/category')
+            .pipe(map(response => <Category[]>response));
+    }
 
 }

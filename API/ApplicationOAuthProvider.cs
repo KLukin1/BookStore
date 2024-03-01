@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DataBase;
+using Microsoft.Owin.Security.OAuth;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using DataBase;
-using Microsoft.Owin.Security.OAuth;
 
 namespace API
 {

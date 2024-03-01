@@ -1,17 +1,17 @@
 
 <div class="container">
-  <div class="row" *ngFor="let slide of slides">
-    <div class="col-4 col-xs-6 one-book" *ngFor="let book of slide">
-      <div class="book-wrapper">
-        <a [routerLink]="['/books', book.BookId]"><img src="https://klaras-book-store.azurewebsites.net/{{book.Image}}" class="book-img" /></a>
-        <a [routerLink]="['/books', book.BookId]"><span class="title-text">{{book.Title}}</span></a>
-        <span class="author-text">{{book.AuthorLastName}}, {{book.AuthorFirstName}}</span>
-        <div class="row price">
-          <span class="col price-text" [ngClass]="{'discount': book.Discount}">{{book.Price | currency:"EUR"}}</span>
-          <span class="col price-text" *ngIf="book.Discount">{{book.Discount | currency:"EUR"}}</span>
+    <div class="row" *ngFor="let slide of slides">
+        <div class="col-4 col-xs-6 one-book" *ngFor="let book of slide">
+            <div class="book-wrapper">
+                <a [routerLink]="['/books', book.BookId]"><img src="{{siteName}}/{{book.Image}}" class="book-img" /></a>
+                <a [routerLink]="['/books', book.BookId]"><span class="title-text">{{book.Title}}</span></a>
+                <span class="author-text">{{book.AuthorLastName}}, {{book.AuthorFirstName}}</span>
+                <div class="row price">
+                    <span class="col price-text" [ngClass]="{'discount': book.Discount}">{{book.Price | currency:"EUR"}}</span>
+                    <span class="col price-text" *ngIf="book.Discount">{{book.Discount | currency:"EUR"}}</span>
+                </div>
+                <button type="button" (click)="addToBasket(book.BookId, 1)" class="btn btn-sm btn-dark">Add to Basket</button>
+            </div>
         </div>
-        <button type="button" (click)="addToBasket(book.BookId, 1)" class="btn btn-sm btn-dark">Add to Basket</button>
-      </div>
     </div>
-  </div>
 </div>

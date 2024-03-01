@@ -3,6 +3,8 @@ import { BasketService } from '../services/basket-service';
 import { BasketItem } from '../models/basket-model';
 import { NotifierService } from 'angular-notifier';
 import { UserService } from '../services/user-service';
+import * as myGlobals from '../global-variables';
+
 
 @Component({
     selector: 'basket',
@@ -12,11 +14,12 @@ import { UserService } from '../services/user-service';
 export class BasketComponent implements OnInit {
 
     books: BasketItem[] = [];
-    prices: number[];
     totalPrice: number;
     basketNum: number;
-  isUserLogged: boolean = false;
-  isBasketEmpty: boolean = true;
+    isUserLogged: boolean = false;
+    isBasketEmpty: boolean = true;
+    siteName: string = myGlobals.siteName;
+    userId: number = -1;
 
     constructor(private basketService: BasketService, private notifier: NotifierService) { }
 
@@ -32,11 +35,11 @@ export class BasketComponent implements OnInit {
                 this.books = response;
                 this.calculatePrices();
                 this.sendBasketNum();
-            if (this.books.length > 0) {
-              this.isBasketEmpty = false;
-            } else {
-              this.isBasketEmpty = true;
-            }
+                if (this.books.length > 0) {
+                    this.isBasketEmpty = false;
+                } else {
+                    this.isBasketEmpty = true;
+                }
             })
     }
 
@@ -44,16 +47,22 @@ export class BasketComponent implements OnInit {
         this.basketService.sendBasketNum();
     }
 
+    deleteFromBasketConfirm(book: BasketItem) {
+        if (confirm("Are you sure you want to delete " + book.Title + " from the Basket?")) {
+            this.deleteFromBasket(book);
+        }
+    }
+
     deleteFromBasket(book: BasketItem) {
         book.Count = 0;
         this.basketService.changeCount(book).subscribe(
             response => {
-            this.books = this.books.filter(x => x.BasketItemId != book.BasketItemId);
-            if (this.books.length > 0) {
-              this.isBasketEmpty = false;
-            } else {
-              this.isBasketEmpty = true;
-            }
+                this.books = this.books.filter(x => x.BasketItemId != book.BasketItemId);
+                if (this.books.length > 0) {
+                    this.isBasketEmpty = false;
+                } else {
+                    this.isBasketEmpty = true;
+                }
                 this.calculatePrices();
                 this.sendBasketNum();
                 this.notifier.notify("success", "Book was removed from the basket");
@@ -61,18 +70,14 @@ export class BasketComponent implements OnInit {
     }
 
     calculatePrices() {
-        this.prices = [];
         this.totalPrice = 0;
 
         for (let book of this.books) {
             if (book.Discount) {
-                this.prices.push(book.Discount * book.Count);
+                this.totalPrice += (book.Discount * book.Count);
             } else {
-                this.prices.push(book.Price * book.Count);
+                this.totalPrice += (book.Price * book.Count);
             }
-        }
-        for (let price of this.prices) {
-            this.totalPrice += price;
         }
     }
 
@@ -81,18 +86,28 @@ export class BasketComponent implements OnInit {
         book.Count = c;
         this.calculatePrices();
         this.basketService.changeCount(book).subscribe(
-          result => {
-            this.notifier.notify("info", "Basket is updated");
+            result => {
+                this.notifier.notify("info", "Basket is updated");
                 this.basketService.sendBasketNum();
             })
     }
 
     getIsUserLogged() {
         if (UserService.getCurrentUser()) {
-            console.log(UserService.getCurrentUser())
+            this.userId = UserService.getCurrentUser()["UserId"];
             this.isUserLogged = true;
         } else {
             this.isUserLogged = false;
+        }
+    }
+
+    pay() {
+        if (confirm("Order all of the Items in your Basket?")) {
+            this.basketService.pay(this.userId).subscribe(
+                result => {
+                    this.notifier.notify("success", "You have succesfully ordered the Books!");
+                    this.isBasketEmpty = true;
+                })
         }
     }
 }

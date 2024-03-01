@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as myGlobals from '../global-variables';
 
 
 @Component({
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-    
+    siteName: string = myGlobals.siteName;
 }

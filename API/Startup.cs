@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using System;
 
 [assembly: OwinStartup(typeof(API.Startup))]
 

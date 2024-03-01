@@ -9,7 +9,7 @@ import { NotifierService } from 'angular-notifier';
 })
 export class LogoutComponent {
 
-    constructor(private router: Router, private notifier: NotifierService) {}
+    constructor(private router: Router, private notifier: NotifierService) { }
 
     logout() {
         localStorage.clear();

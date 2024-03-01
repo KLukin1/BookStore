@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { BasketService } from '../services/basket-service';
 import { UserService } from '../services/user-service';
+import * as myGlobals from '../global-variables';
 
 @Component({
     selector: 'books',
@@ -17,8 +18,9 @@ export class BooksComponent implements OnInit {
     categoryName: string;
     author: string;
     buttonText: string = 'Sort By  <span class="caret"></span>';
-  count1: number = 1;
-  loader: boolean = true;
+    count1: number = 1;
+    loader: boolean = true;
+    siteName: string = myGlobals.siteName;
 
     constructor(private bookService: BookService, private basketService: BasketService,
         private route: ActivatedRoute, private router: Router, private notifier: NotifierService) {
@@ -41,10 +43,10 @@ export class BooksComponent implements OnInit {
     }
 
     getBooks(categoryName: string, author: string) {
-        this.bookService.getBooks(categoryName, author,"").subscribe(
+        this.bookService.getBooks(categoryName, author, "").subscribe(
             result => {
-            this.books = result;
-            this.loader = false;
+                this.books = result;
+                this.loader = false;
             }
         )
     }

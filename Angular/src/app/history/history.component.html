@@ -1,0 +1,35 @@
+
+<div *ngIf="!isUserLogged" class="no-logged-user">
+    <h3>Previous purchases are empty.</h3>
+    <span><a routerLink="/account">Sign In</a> to see your previous purchases.</span>
+</div>
+
+<div *ngIf="isUserLogged && isHistoryEmpty" class="no-logged-user">
+    <h3>Previous purchases are empty</h3>
+    <span>Check our <a routerLink="/books">Books</a>.</span>
+</div>
+
+<div *ngIf="isUserLogged && !isHistoryEmpty">
+    <h2>Previous purchases</h2>
+    <div *ngFor="let purchases of history">
+        <div class="basket-item" *ngFor="let purchase of purchases">
+            <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <a [routerLink]="['/books', purchase.BookId]"><img src="{{siteName}}{{purchase.Image}}" class="book-img" /></a>
+                </div>
+                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-4 col-xs-4">
+                    <a [routerLink]="['/books', purchase.BookId]"><span class="book-title">{{purchase.Title}}</span></a>
+                    <span class="book-author">{{purchase.AuthorLastName}}, {{purchase.AuthorFirstName}}</span>
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-2 col-xs-2">
+                    <span>{{purchase.Count}}</span>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <span *ngIf="purchase.Discount" class="book-price">{{purchase.Discount * purchase.Count | currency:'EUR'}}</span><br />
+                    <span class="book-price" [ngClass]="{'discount': purchase.Discount}">{{purchase.Price * purchase.Count | currency:'EUR'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
