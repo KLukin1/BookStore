@@ -13,8 +13,8 @@ import * as myGlobals from '../global-variables';
 })
 export class CarouselComponent {
 
-    recommendedBooks: Book[] = [];
-    slides = [[]];
+    books: Book[] = [];
+    responsiveOptions: any[] | undefined;
     siteName: string = myGlobals.siteName;
 
     constructor(private bookService: BookService, private basketService: BasketService,
@@ -22,26 +22,31 @@ export class CarouselComponent {
 
     ngOnInit() {
         this.getRecommended();
+
+        this.responsiveOptions = [
+            {
+                breakpoint: '1199px',
+                numVisible: 1,
+                numScroll: 1
+            },
+            {
+                breakpoint: '991px',
+                numVisible: 2,
+                numScroll: 1
+            },
+            {
+                breakpoint: '767px',
+                numVisible: 1,
+                numScroll: 1
+            }
+        ];
     }
 
     getRecommended() {
         this.bookService.getRecommended().subscribe(
             result => {
-                this.recommendedBooks = result;
-                this.slides = this.makeSlides(this.recommendedBooks, 3);
+                this.books = result;
             })
-    }
-
-    makeSlides(books, slideSize) {
-        var slideBooks = [];
-        for (let i = 0; i < books.length; i += slideSize) {
-            slideBooks.push(books.slice(i, i + slideSize));
-        }
-        return slideBooks;
-    }
-
-    timer() {
-
     }
 
     // todo - fix bug: adding doesn't work if book is already in basket

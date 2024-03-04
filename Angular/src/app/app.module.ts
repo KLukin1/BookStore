@@ -21,6 +21,10 @@ import { AuthInterceptor } from './authentication/auth.interceptor';
 import { LogoutComponent } from './logout/logout.component';
 import { LoaderComponent } from './loader/loader.component';
 import { HistoryComponent } from './history/history.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AccordionModule } from 'primeng/accordion';
+import { CarouselModule } from 'primeng/carousel';
+
 
 @NgModule({
     declarations: [
@@ -56,7 +60,10 @@ import { HistoryComponent } from './history/history.component';
                     position: 'top'
                 }
             }
-        })
+        }),
+        BrowserAnimationsModule,
+        AccordionModule,
+        CarouselModule
     ],
     providers: [{
         provide: HTTP_INTERCEPTORS,

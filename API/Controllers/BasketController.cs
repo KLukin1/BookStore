@@ -202,7 +202,7 @@ namespace API.Controllers
             return Ok(GetHistoryList(loginModel.UserId));
         }
 
-        public IEnumerable<IGrouping<int, BasketGetApiModel>> GetHistoryList(int userId)
+        public List<HistoryGetApiModel> GetHistoryList(int userId)
         {
             using (var db = new BookStoreContext())
             {
@@ -220,16 +220,23 @@ namespace API.Controllers
                                                     Book.Title, Book.Image, Book.Price, Book.Discount,
                                                     Author.FirstName as AuthorFirstName, 
                                                     Author.LastName as AuthorLastName,
-                                                    BasketItem.[Count] as [Count]
+                                                    BasketItem.[Count] as [Count],
+                                                    Basket.DatePayed as DatePayed
                                                     from BasketItem
                                                     inner join Basket
                                                     on BasketItem.BasketId = Basket.Id
                                                     inner join Book
                                                     on BasketItem.BookId = Book.Id
                                                     inner join Author
-                                                    on Book.AuthorId = Author.Id " + where, parameters.ToArray()).ToList();
+                                                    on Book.AuthorId = Author.Id " + where + " order by DatePayed desc", parameters.ToArray()).ToList();
 
-                IEnumerable<IGrouping<int, BasketGetApiModel>> sorted = list.GroupBy(x => x.BasketId, x => x);
+                List<HistoryGetApiModel> sorted = list.GroupBy(x => x.BasketId)
+                    .Select(x => new HistoryGetApiModel
+                    {
+                        BasketId = x.Key,
+                        Items = x.ToList()
+                    })
+                    .ToList();
 
                 return sorted;
             }

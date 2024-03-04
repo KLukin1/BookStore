@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { BasketItem } from '../models/basket-model';
+import { BasketItem, HistoryItem } from '../models/basket-model';
 import * as myGlobals from '../global-variables';
 
 @Injectable({
@@ -40,9 +40,9 @@ export class BasketService {
             .pipe(map(response => <any>response));
     }
 
-    getHistory(): Observable<BasketItem[][]> {
+    getHistory(): Observable<HistoryItem[]> {
         return this.httpClient.get(this.site + '/history')
-            .pipe(map(response => <BasketItem[][]>response));
+            .pipe(map(response => <HistoryItem[]>response));
     }
 
     private subject = new Subject<any>();

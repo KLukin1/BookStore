@@ -1,9 +1,9 @@
 
-<div class="container">
-    <div class="row" *ngFor="let slide of slides">
-        <div class="col-4 col-xs-6 one-book" *ngFor="let book of slide">
-            <div class="book-wrapper">
-                <a [routerLink]="['/books', book.BookId]"><img src="{{siteName}}/{{book.Image}}" class="book-img" /></a>
+<p-carousel [value]="books" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
+    <ng-template let-book pTemplate="item">
+        <div class="book-wrapper">
+            <a [routerLink]="['/books', book.BookId]"><img src="{{siteName}}/{{book.Image}}" class="book-img" /></a>
+            <div>
                 <a [routerLink]="['/books', book.BookId]"><span class="title-text">{{book.Title}}</span></a>
                 <span class="author-text">{{book.AuthorLastName}}, {{book.AuthorFirstName}}</span>
                 <div class="row price">
@@ -13,5 +13,5 @@
                 <button type="button" (click)="addToBasket(book.BookId, 1)" class="btn btn-sm btn-dark">Add to Basket</button>
             </div>
         </div>
-    </div>
-</div>
+    </ng-template>
+</p-carousel>

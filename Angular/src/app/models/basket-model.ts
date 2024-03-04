@@ -9,4 +9,12 @@ export class BasketItem {
     BasketId: number;
     BasketItemId: number;
     Count: number;
+    DatePayed: Date;
+}
+
+export class HistoryItem {
+    BasketId: number;
+    DatePayed: Date;
+    Items: BasketItem[];
+    TotalSum: number;
 }

@@ -28,18 +28,20 @@
               "src/assets"
             ],
             "styles": [
-              //"../node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css",
-              //"../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css",
-              //"../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-regular.css",
-              //"../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css",
+                //"../node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css",
+                //"../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css",
+                //"../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-regular.css",
+                //"../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css",
 
-              //"node_modules/@fortawesome/fontawesome-free/scss/fontawesome.css",
-              //"node_modules/@fortawesome/fontawesome-free/scss/solid.css",
-              //"node_modules/@fortawesome/fontawesome-free/scss/regular.css",
-              //"node_modules/@fortawesome/fontawesome-free/scss/brands.css",
-              //"node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.css",
-              //"node_modules/angular-bootstrap-md/assets/scss/mdb.css",
-              "src/styles.less"
+                //"node_modules/@fortawesome/fontawesome-free/scss/fontawesome.css",
+                //"node_modules/@fortawesome/fontawesome-free/scss/solid.css",
+                //"node_modules/@fortawesome/fontawesome-free/scss/regular.css",
+                //"node_modules/@fortawesome/fontawesome-free/scss/brands.css",
+                //"node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.css",
+                //"node_modules/angular-bootstrap-md/assets/scss/mdb.css",
+                "src/styles.less",
+                "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+                "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [
               //"../node_modules/@fortawesome/fontawesome/index.js",
