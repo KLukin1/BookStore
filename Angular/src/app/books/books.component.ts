@@ -57,8 +57,8 @@ export class BooksComponent implements OnInit {
 
     sortAZ() {
         this.books.sort(function (title1, title2) {
-            var textA = title1.Title.toUpperCase();
-            var textB = title2.Title.toUpperCase();
+            var textA = title1.title.toUpperCase();
+            var textB = title2.title.toUpperCase();
             return (textA < textB) ? -1 : (textB < textA) ? 1 : 0;
         })
         this.buttonText = 'Title: A-Z';
@@ -66,8 +66,8 @@ export class BooksComponent implements OnInit {
 
     sortZA() {
         this.books.sort(function (title1, title2) {
-            var textA = title1.Title.toUpperCase();
-            var textB = title2.Title.toUpperCase();
+            var textA = title1.title.toUpperCase();
+            var textB = title2.title.toUpperCase();
             return (textA < textB) ? 1 : (textB < textA) ? -1 : 0;
         })
         this.buttonText = 'Title: Z-A';
@@ -75,13 +75,13 @@ export class BooksComponent implements OnInit {
 
     sortLowHigh() {
         this.books.sort(function (price1, price2) {
-            var p1 = price1.Price;
-            var p2 = price2.Price;
-            if (price1.Discount) {
-                p1 = price1.Discount;
+            var p1 = price1.price;
+            var p2 = price2.price;
+            if (price1.discount) {
+                p1 = price1.discount;
             }
-            if (price2.Discount) {
-                p2 = price2.Discount;
+            if (price2.discount) {
+                p2 = price2.discount;
             }
             return (p1 < p2) ? -1 : (p2 < p1) ? 1 : 0;
         })
@@ -90,13 +90,13 @@ export class BooksComponent implements OnInit {
 
     sortHighLow() {
         this.books.sort(function (price1, price2) {
-            var p1 = price1.Price;
-            var p2 = price2.Price;
-            if (price1.Discount) {
-                p1 = price1.Discount;
+            var p1 = price1.price;
+            var p2 = price2.price;
+            if (price1.discount) {
+                p1 = price1.discount;
             }
-            if (price2.Discount) {
-                p2 = price2.Discount;
+            if (price2.discount) {
+                p2 = price2.discount;
             }
             return (p1 < p2) ? 1 : (p2 < p1) ? -1 : 0;
         })

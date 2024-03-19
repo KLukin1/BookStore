@@ -1,11 +1,11 @@
 namespace DataBase
 {
-    using System.Data.Entity;
+    using Microsoft.EntityFrameworkCore;
 
     public partial class BookStoreContext : DbContext
     {
-        public BookStoreContext()
-            : base("name=BookShopEntities")
+        public BookStoreContext(DbContextOptions<BookStoreContext> options)
+            : base(options)
         {
         }
 

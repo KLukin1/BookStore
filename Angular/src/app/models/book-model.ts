@@ -1,14 +1,14 @@
 export class Book {
-    BookId: number;
-    CategoryName: string;
-    Title: string;
-    Year: number;
-    ISBN: string;
-    Summary: string;
-    Price: number;
-    Discount: number;
-    Image: string;
-    AuthorFirstName: string;
-    AuthorLastName: string;
-    IsReccomended: boolean;
+    bookId: number;
+    categoryName: string;
+    title: string;
+    year: number;
+    iSBN: string;
+    summary: string;
+    price: number;
+    discount: number;
+    image: string;
+    authorFirstName: string;
+    authorLastName: string;
+    isReccomended: boolean;
 }

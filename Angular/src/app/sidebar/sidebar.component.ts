@@ -29,14 +29,14 @@ export class SidebarComponent implements OnInit {
                 this.loader = false;
                 this.categories = response;
                 for (let oneCateg of this.categories) {
-                    var c = this.categoryUI.find(x => x.CategoryName == oneCateg.CategoryName);
+                    var c = this.categoryUI.find(x => x.categoryName == oneCateg.categoryName);
                     if (c) {
-                        c.Authors.push(oneCateg.AuthorFullName);
+                        c.authors.push(oneCateg.authorFullName);
                     } else {
                         var newC = new CategoryUI();
-                        newC.Authors = [];
-                        newC.CategoryName = oneCateg.CategoryName;
-                        newC.Authors.push(oneCateg.AuthorFullName);
+                        newC.authors = [];
+                        newC.categoryName = oneCateg.categoryName;
+                        newC.authors.push(oneCateg.authorFullName);
                         this.categoryUI.push(newC);
                     }
                 }
@@ -45,7 +45,7 @@ export class SidebarComponent implements OnInit {
     }
 
     dropdown(category: CategoryUI) {
-        if (this.selectedCategory.CategoryName == category.CategoryName) {
+        if (this.selectedCategory.categoryName == category.categoryName) {
             this.selectedCategory = new CategoryUI();
         } else {
             this.selectedCategory = category;

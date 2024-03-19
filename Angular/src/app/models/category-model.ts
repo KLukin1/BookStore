@@ -1,10 +1,10 @@
 
 export class Category {
-    CategoryName: string;
-    AuthorFullName: string;
+    categoryName: string;
+    authorFullName: string;
 }
 
 export class CategoryUI {
-    CategoryName: string;
-    Authors: string[];
+    categoryName: string;
+    authors: string[];
 }

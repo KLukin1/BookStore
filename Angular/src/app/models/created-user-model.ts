@@ -1,13 +1,13 @@
 export class CreatedUser {
-    Id: number;
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    Password: string;
-    DeliveryAddress: string;
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    deliveryAddress: string;
 }
 
 export class UserLogin {
-    Email: string;
-    Password: string;
+    email: string;
+    password: string;
 }

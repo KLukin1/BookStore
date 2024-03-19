@@ -2,15 +2,15 @@
 <p-carousel [value]="books" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions">
     <ng-template let-book pTemplate="item">
         <div class="book-wrapper">
-            <a [routerLink]="['/books', book.BookId]"><img src="{{siteName}}/{{book.Image}}" class="book-img" /></a>
+            <a [routerLink]="['/books', book.bookId]"><img src="{{siteName}}/{{book.image}}" class="book-img" /></a>
             <div>
-                <a [routerLink]="['/books', book.BookId]"><span class="title-text">{{book.Title}}</span></a>
-                <span class="author-text">{{book.AuthorLastName}}, {{book.AuthorFirstName}}</span>
+                <a [routerLink]="['/books', book.bookId]"><span class="title-text">{{book.title}}</span></a>
+                <span class="author-text">{{book.authorLastName}}, {{book.authorFirstName}}</span>
                 <div class="row price">
-                    <span class="col price-text" [ngClass]="{'discount': book.Discount}">{{book.Price | currency:"EUR"}}</span>
-                    <span class="col price-text" *ngIf="book.Discount">{{book.Discount | currency:"EUR"}}</span>
+                    <span class="col price-text" [ngClass]="{'discount': book.discount}">{{book.price | currency:"EUR"}}</span>
+                    <span class="col price-text" *ngIf="book.discount">{{book.discount | currency:"EUR"}}</span>
                 </div>
-                <button type="button" (click)="addToBasket(book.BookId, 1)" class="btn btn-sm btn-dark">Add to Basket</button>
+                <button type="button" (click)="addToBasket(book.bookId, 1)" class="btn btn-sm btn-dark">Add to Basket</button>
             </div>
         </div>
     </ng-template>

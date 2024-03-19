@@ -20,9 +20,13 @@ export class UserService {
     }
 
     userAuthentication(email: string, password: string): Observable<any> {
-        var data = "username=" + email + "&password=" + password + "&grant_type=password";
-        var reqHeader = new HttpHeaders({ "Content-Type": "application/x-www-urlencoded", "No-Auth": "True" });
-        return this.httpClient.post(this.site + "token", data, { headers: reqHeader });
+        var data = {
+            "email": email,
+            "password": password
+        }
+        var reqHeader = new HttpHeaders({ "Content-Type": "application/json", "Auth": "false" });
+
+        return this.httpClient.post(this.site + "api/login", data, { headers: reqHeader, responseType: 'text' });
     }
 
     setCurrentUser(): Observable<any> {

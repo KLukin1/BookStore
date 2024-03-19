@@ -50,10 +50,11 @@ export class AccountComponent implements OnInit {
     onSignIn(f) {
         this.userService.userAuthentication(this.getEmail.value, this.getPassword.value).subscribe(
             data => {
-                localStorage.setItem('userToken', data.access_token);
+                localStorage.setItem('userToken', data);
                 this.setCurrentUser();
             },
             (err: HttpErrorResponse) => {
+                console.log(err);
                 this.isLoginError = true;
             });
     }
@@ -75,7 +76,7 @@ export class AccountComponent implements OnInit {
                 this.isUserLogged = true;
                 this.currentUser = UserService.getCurrentUser();
                 this.basketService.sendBasketNum();
-                this.notifier.notify("info", "Hello " + this.currentUser.FirstName);
+                this.notifier.notify("info", "Hello " + this.currentUser.firstName);
             })
     }
 

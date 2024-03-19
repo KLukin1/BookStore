@@ -1,0 +1,116 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\A-deepness-in-the-sky.jpg" />
+    <None Remove="images\bookstore-location.jpg" />
+    <None Remove="images\boy.jpg" />
+    <None Remove="images\Dark-frontiers.jpg" />
+    <None Remove="images\dorian-gray.jpg" />
+    <None Remove="images\earnest.jpg" />
+    <None Remove="images\Emma.jpg" />
+    <None Remove="images\GoT-1.jpg" />
+    <None Remove="images\GoT-2.jpg" />
+    <None Remove="images\GoT-3.jpg" />
+    <None Remove="images\GoT-4.jpg" />
+    <None Remove="images\GoT-5.jpg" />
+    <None Remove="images\guest-list.jpg" />
+    <None Remove="images\happy-prince.jpg" />
+    <None Remove="images\Hitchhikers-guide.jpg" />
+    <None Remove="images\HP-and-chamber-of-secrets.jpg" />
+    <None Remove="images\HP-and-goblet-of-fire.jpg" />
+    <None Remove="images\HP-and-half-blood-prince.jpg" />
+    <None Remove="images\HP-and-philosophers-stone.jpg" />
+    <None Remove="images\HP-and-prisoner-of-azkaban.jpg" />
+    <None Remove="images\HP-and-the-deathly-hallows.jpg" />
+    <None Remove="images\HP-and-the-order-of-the-phoenix.jpg" />
+    <None Remove="images\huckleberry-finn.jpg" />
+    <None Remove="images\hunting-party.jpg" />
+    <None Remove="images\ideal-husband.jpg" />
+    <None Remove="images\If-it-bleeds.jpg" />
+    <None Remove="images\Infinite-stars.jpg" />
+    <None Remove="images\institute-king.jpg" />
+    <None Remove="images\it-king.jpg" />
+    <None Remove="images\logo-purple.png" />
+    <None Remove="images\mark-twain-collection.jpg" />
+    <None Remove="images\matilda.jpg" />
+    <None Remove="images\mr-fox.jpg" />
+    <None Remove="images\persuasion.jpg" />
+    <None Remove="images\pride-and-prejudice.jpg" />
+    <None Remove="images\Restaurant-at-the-end-of-the-universe.jpg" />
+    <None Remove="images\sense-and-sensibility.jpg" />
+    <None Remove="images\shining-king.jpg" />
+    <None Remove="images\short-stories-wilde.jpg" />
+    <None Remove="images\tom-sawyer.jpg" />
+    <None Remove="images\twits.jpg" />
+    <None Remove="images\zones-of-thought.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="images\A-deepness-in-the-sky.jpg" />
+    <Content Include="images\bookstore-location.jpg" />
+    <Content Include="images\boy.jpg" />
+    <Content Include="images\Dark-frontiers.jpg" />
+    <Content Include="images\dorian-gray.jpg" />
+    <Content Include="images\earnest.jpg" />
+    <Content Include="images\Emma.jpg" />
+    <Content Include="images\GoT-1.jpg" />
+    <Content Include="images\GoT-2.jpg" />
+    <Content Include="images\GoT-3.jpg" />
+    <Content Include="images\GoT-4.jpg" />
+    <Content Include="images\GoT-5.jpg" />
+    <Content Include="images\guest-list.jpg" />
+    <Content Include="images\happy-prince.jpg" />
+    <Content Include="images\Hitchhikers-guide.jpg" />
+    <Content Include="images\HP-and-chamber-of-secrets.jpg" />
+    <Content Include="images\HP-and-goblet-of-fire.jpg" />
+    <Content Include="images\HP-and-half-blood-prince.jpg" />
+    <Content Include="images\HP-and-philosophers-stone.jpg" />
+    <Content Include="images\HP-and-prisoner-of-azkaban.jpg" />
+    <Content Include="images\HP-and-the-deathly-hallows.jpg" />
+    <Content Include="images\HP-and-the-order-of-the-phoenix.jpg" />
+    <Content Include="images\huckleberry-finn.jpg" />
+    <Content Include="images\hunting-party.jpg" />
+    <Content Include="images\ideal-husband.jpg" />
+    <Content Include="images\If-it-bleeds.jpg" />
+    <Content Include="images\Infinite-stars.jpg" />
+    <Content Include="images\institute-king.jpg" />
+    <Content Include="images\it-king.jpg" />
+    <Content Include="images\logo-purple.png" />
+    <Content Include="images\mark-twain-collection.jpg" />
+    <Content Include="images\matilda.jpg" />
+    <Content Include="images\mr-fox.jpg" />
+    <Content Include="images\persuasion.jpg" />
+    <Content Include="images\pride-and-prejudice.jpg" />
+    <Content Include="images\Restaurant-at-the-end-of-the-universe.jpg" />
+    <Content Include="images\sense-and-sensibility.jpg" />
+    <Content Include="images\shining-king.jpg" />
+    <Content Include="images\short-stories-wilde.jpg" />
+    <Content Include="images\tom-sawyer.jpg" />
+    <Content Include="images\twits.jpg" />
+    <Content Include="images\zones-of-thought.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.28" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataBase\DataBase.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -21,7 +21,7 @@ export class BasketComponent implements OnInit {
     siteName: string = myGlobals.siteName;
     userId: number = -1;
 
-    constructor(private basketService: BasketService, private notifier: NotifierService) { }
+    constructor(private basketService: BasketService, private notifier: NotifierService, private userService: UserService) { }
 
     ngOnInit() {
         this.getIsUserLogged();
@@ -40,6 +40,7 @@ export class BasketComponent implements OnInit {
                 } else {
                     this.isBasketEmpty = true;
                 }
+                console.log(this.books);
             })
     }
 
@@ -48,16 +49,16 @@ export class BasketComponent implements OnInit {
     }
 
     deleteFromBasketConfirm(book: BasketItem) {
-        if (confirm("Are you sure you want to delete " + book.Title + " from the Basket?")) {
+        if (confirm("Are you sure you want to delete " + book.title + " from the Basket?")) {
             this.deleteFromBasket(book);
         }
     }
 
     deleteFromBasket(book: BasketItem) {
-        book.Count = 0;
+        book.count = 0;
         this.basketService.changeCount(book).subscribe(
             response => {
-                this.books = this.books.filter(x => x.BasketItemId != book.BasketItemId);
+                this.books = this.books.filter(x => x.basketItemId != book.basketItemId);
                 if (this.books.length > 0) {
                     this.isBasketEmpty = false;
                 } else {
@@ -73,17 +74,17 @@ export class BasketComponent implements OnInit {
         this.totalPrice = 0;
 
         for (let book of this.books) {
-            if (book.Discount) {
-                this.totalPrice += (book.Discount * book.Count);
+            if (book.discount) {
+                this.totalPrice += (book.discount * book.count);
             } else {
-                this.totalPrice += (book.Price * book.Count);
+                this.totalPrice += (book.price * book.count);
             }
         }
     }
 
 
     changeCounter(c: number, book: BasketItem) {
-        book.Count = c;
+        book.count = c;
         this.calculatePrices();
         this.basketService.changeCount(book).subscribe(
             result => {

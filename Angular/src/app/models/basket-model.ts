@@ -1,20 +1,20 @@
 export class BasketItem {
-    BookId: number;
-    Title: string;
-    Image: string;
-    AuthorFirstName: string;
-    AuthorLastName: string;
-    Price: number;
-    Discount: number;
-    BasketId: number;
-    BasketItemId: number;
-    Count: number;
-    DatePayed: Date;
+    bookId: number;
+    title: string;
+    image: string;
+    authorFirstName: string;
+    authorLastName: string;
+    price: number;
+    discount: number;
+    basketId: number;
+    basketItemId: number;
+    count: number;
+    datePayed: Date;
 }
 
 export class HistoryItem {
-    BasketId: number;
-    DatePayed: Date;
-    Items: BasketItem[];
-    TotalSum: number;
+    basketId: number;
+    datePayed: Date;
+    items: BasketItem[];
+    totalSum: number;
 }
