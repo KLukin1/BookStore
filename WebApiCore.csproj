@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="images\**" />
+    <Compile Remove="_internal\**" />
     <Content Remove="images\**" />
+    <Content Remove="_internal\**" />
     <EmbeddedResource Remove="images\**" />
+    <EmbeddedResource Remove="_internal\**" />
     <None Remove="images\**" />
+    <None Remove="_internal\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataBase\DataBase.csproj" />
+    <ProjectReference Include="_internal\DataBase\DataBase.csproj" />
   </ItemGroup>
+
 
 </Project>
