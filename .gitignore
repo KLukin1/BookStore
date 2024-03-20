@@ -14,3 +14,7 @@
 /.gitignore
 /.gitignore
 /.gitignore
+/bin/Debug/net8.0
+/obj
+/_internal/DataBase/bin/Debug
+/_internal/DataBase/obj
