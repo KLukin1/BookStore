@@ -4,27 +4,6 @@ VisualStudioVersion = 17.4.33110.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "DataBase\DataBase.csproj", "{961CC1C5-B284-4E9F-8A49-565E5A02F859}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Angular", "Angular\", "{258660D0-7515-49E4-8477-C8578F082649}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_61729"
-		Debug.AspNetCompiler.PhysicalPath = "Angular\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61729\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_61729"
-		Release.AspNetCompiler.PhysicalPath = "Angular\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61729\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "61729"
-		SlnRelativePath = "Angular\"
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiCore", "WebApiCore\WebApiCore.csproj", "{3C7D0960-36AE-4F07-A5F9-EE5AB9ACD06F}"
 EndProject
 Global
@@ -37,9 +16,6 @@ Global
 		{961CC1C5-B284-4E9F-8A49-565E5A02F859}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{961CC1C5-B284-4E9F-8A49-565E5A02F859}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{961CC1C5-B284-4E9F-8A49-565E5A02F859}.Release|Any CPU.Build.0 = Release|Any CPU
-		{258660D0-7515-49E4-8477-C8578F082649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{258660D0-7515-49E4-8477-C8578F082649}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{258660D0-7515-49E4-8477-C8578F082649}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{3C7D0960-36AE-4F07-A5F9-EE5AB9ACD06F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C7D0960-36AE-4F07-A5F9-EE5AB9ACD06F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C7D0960-36AE-4F07-A5F9-EE5AB9ACD06F}.Release|Any CPU.ActiveCfg = Release|Any CPU
