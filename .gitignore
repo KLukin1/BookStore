@@ -10,6 +10,7 @@
 /node_modules
 /WebApiCore/bin/Debug/net6.0
 /WebApiCore/obj
+/WebApiCore/bin
 /.gitignore
 /.gitignore
 /.gitignore
