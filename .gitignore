@@ -18,3 +18,5 @@
 /obj
 /_internal/DataBase/bin/Debug
 /_internal/DataBase/obj
+/bin/Release/net8.0
+/_internal/DataBase/bin/Release/net8.0
