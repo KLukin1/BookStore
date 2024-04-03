@@ -1,5 +1,6 @@
 ﻿using API.Models;
 using DataBase;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApiCore.Controllers;
 using WebApiCore.DTOs;
@@ -18,18 +19,27 @@ namespace API.Controllers
             this.userRepository = userRepository;
         }
 
-
+        [Authorize]
         [HttpGet]
         [Route("")]
         public IActionResult GetUsers()
         {
+            if (!LoggedInUser.IsAdmin)
+            {
+                return Unauthorized();
+            }
             return Ok(userRepository.Get());
         }
 
+        [Authorize]
         [HttpGet]
         [Route("{id:int}")]
         public IActionResult GetUsersById(int id)
         {
+            if (!LoggedInUser.IsAdmin)
+            {
+                return Unauthorized();
+            }
             return Ok(userRepository.GetById(id));
         }
 

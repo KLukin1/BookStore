@@ -22,11 +22,13 @@ namespace WebApiCore.Controllers
                     var jwtSecurityToken = handler.ReadJwtToken(token);
                     var email = jwtSecurityToken.Claims.First(claim => claim.Type == "email").Value;
                     var userId = jwtSecurityToken.Claims.First(claim => claim.Type == "userId").Value;
+                    var adminClaim = jwtSecurityToken.Claims.FirstOrDefault(claim => claim.Type == "isAdmin");
 
                     return new CurrentUser()
                     {
                         UserId = int.Parse(userId),
-                        Email = email
+                        Email = email,
+                        IsAdmin = adminClaim != null ? bool.Parse(adminClaim.Value) : false
                     };
                 }
                 else
