@@ -28,9 +28,9 @@ namespace API.Controllers
 
         private bool PostBookToBasket(BookIdModel bookModel, int userId)
         {
-            var basketExists = db.Baskets.Any(x => x.UserId == userId && x.IsPayed != true);
+            var basket = db.Baskets.FirstOrDefault(x => x.UserId == userId && x.IsPayed != true);
 
-            if (!basketExists)
+            if (basket == null)
             {
                 var newBasket = new Basket();
                 newBasket.UserId = userId;
@@ -47,12 +47,10 @@ namespace API.Controllers
             }
             else
             {
-                var basket = db.Baskets.FirstOrDefault(x => x.UserId == userId && x.IsPayed != true);
-                var itemExists = db.BasketItems.Any(x => x.BookId == bookModel.BookId && x.BasketId == basket.Id);
+                var item = db.BasketItems.FirstOrDefault(x => x.BookId == bookModel.BookId && x.BasketId == basket.Id);
 
-                if (itemExists)
+                if (item != null)
                 {
-                    var item = db.BasketItems.FirstOrDefault(x => x.BookId == bookModel.BookId);
                     item.Count += bookModel.Count;
                 }
                 else
